@@ -1,9 +1,8 @@
 package com.symphony.bdk.core.service.pagination.model;
 
+import jakarta.annotation.Nonnull;
 import lombok.Getter;
 import org.apiguardian.api.API;
-
-import javax.annotation.Nonnull;
 
 /**
  * Stream Pagination Attribute model to be used in stream pagination methods provided by bdk services class.

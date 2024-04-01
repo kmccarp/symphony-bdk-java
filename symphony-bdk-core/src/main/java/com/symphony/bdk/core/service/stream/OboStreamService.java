@@ -13,12 +13,11 @@ import com.symphony.bdk.gen.api.model.V3RoomAttributes;
 import com.symphony.bdk.gen.api.model.V3RoomDetail;
 import com.symphony.bdk.gen.api.model.V3RoomSearchResults;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apiguardian.api.API;
 
 import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Service interface exposing OBO-enabled endpoints to manage streams.

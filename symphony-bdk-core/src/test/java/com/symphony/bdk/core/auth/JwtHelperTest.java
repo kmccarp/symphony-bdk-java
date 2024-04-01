@@ -41,9 +41,11 @@ public class JwtHelperTest {
 
   public static final String CERT_PASSWORD = "changeit";
   public static final String CERT_ALIAS = "1";
-  public static final String JWT = "Bearer eyJraWQiOiJGNG5Xak9WbTRBZU9JYUtEL2JCUWNleXI5MW89IiwiYWxnIjoiUlMyNTYifQ."
-      + "eyJleHAiOjE2NDEzMDgyNzgsInN1YiI6IjEzMDU2NzAwNTgwOTE1IiwiZXh0X3BvZF9pZCI6MTkwLCJwb2xpY3lfaWQiOiJhcHAiLCJlbnRpdGx"
-      + "lbWVudHMiOiIifQ.signature";
+  public static final String JWT = """
+      Bearer eyJraWQiOiJGNG5Xak9WbTRBZU9JYUtEL2JCUWNleXI5MW89IiwiYWxnIjoiUlMyNTYifQ.\
+      eyJleHAiOjE2NDEzMDgyNzgsInN1YiI6IjEzMDU2NzAwNTgwOTE1IiwiZXh0X3BvZF9pZCI6MTkwLCJwb2xpY3lfaWQiOiJhcHAiLCJlbnRpdGx\
+      lbWVudHMiOiIifQ.signature\
+      """;
   private static final String JWT_EXP_INVALID = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIn0.zhWFI4bw81QLE49UnklwMlThgt2ktUOs5M1HKjENgRE.signature";
 
   @Test
@@ -54,9 +56,11 @@ public class JwtHelperTest {
 
   @Test
   void loadInvalidPkcs8PrivateKey() {
-    String invalidPkc8PrivateKey = "-----BEGIN PRIVATE KEY-----\n"
-        + "abcdef\n"
-        + "-----END PRIVATE KEY-----";
+    String invalidPkc8PrivateKey = """
+        -----BEGIN PRIVATE KEY-----
+        abcdef
+        -----END PRIVATE KEY-----\
+        """;
     assertThrows(GeneralSecurityException.class, () -> JwtHelper.parseRsaPrivateKey(invalidPkc8PrivateKey));
   }
 
@@ -68,9 +72,12 @@ public class JwtHelperTest {
 
   @Test
   void loadInvalidPkcs1PrivateKey() {
-    String invalidPkc8PrivateKey = "-----BEGIN RSA PRIVATE KEY-----\n"
-        + "abcde\nf"
-        + "-----END RSA PRIVATE KEY-----";
+    String invalidPkc8PrivateKey = """
+        -----BEGIN RSA PRIVATE KEY-----
+        abcde
+        f\
+        -----END RSA PRIVATE KEY-----\
+        """;
     assertThrows(GeneralSecurityException.class, () -> JwtHelper.parseRsaPrivateKey(invalidPkc8PrivateKey));
   }
 

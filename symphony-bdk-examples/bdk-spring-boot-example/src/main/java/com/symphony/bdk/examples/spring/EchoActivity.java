@@ -27,7 +27,7 @@ public class EchoActivity {
   public void echo(CommandContext context, String argument) {
     Instant timestamp = Instant.ofEpochMilli(context.getEventTimestamp());
     log.info("{}", timestamp);
-    this.messageService.send(context.getStreamId(), String.format("Received argument: %s at %s", argument, timestamp));
+    this.messageService.send(context.getStreamId(), "Received argument: %s at %s".formatted(argument, timestamp));
   }
 
   @Slash("/echo {@mention}")

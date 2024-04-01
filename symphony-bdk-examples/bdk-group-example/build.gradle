@@ -18,3 +18,6 @@ dependencies {
     implementation 'org.slf4j:slf4j-api'
     runtimeOnly 'ch.qos.logback:logback-classic'
 }
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}

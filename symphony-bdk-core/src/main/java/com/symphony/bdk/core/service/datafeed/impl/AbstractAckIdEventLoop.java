@@ -61,9 +61,11 @@ public abstract class AbstractAckIdEventLoop extends AbstractDatafeedLoop {
   @Generated // cannot be easily unit tested
   private void checkProcessingTime(StopWatch stopWatch) {
     if (stopWatch.getTime(TimeUnit.SECONDS) > EVENT_PROCESSING_MAX_DURATION_SECONDS) {
-      log.warn("Events processing took longer than {} seconds, "
-              + "this might lead to events being re-queued in datafeed and re-dispatched."
-              + " You might want to consider processing the event in a separated thread if needed.",
+      log.warn("""
+              Events processing took longer than {} seconds, \
+              this might lead to events being re-queued in datafeed and re-dispatched.\
+               You might want to consider processing the event in a separated thread if needed.\
+              """,
           EVENT_PROCESSING_MAX_DURATION_SECONDS);
     }
   }

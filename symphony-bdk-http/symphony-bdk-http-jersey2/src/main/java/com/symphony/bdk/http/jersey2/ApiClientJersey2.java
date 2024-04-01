@@ -246,9 +246,9 @@ public class ApiClientJersey2 implements ApiClient {
   public String parameterToString(Object param) {
     if (param == null) {
       return "";
-    } else if (param instanceof Collection) {
+    } else if (param instanceof Collection collection) {
       StringBuilder b = new StringBuilder();
-      for (Object o : (Collection<?>) param) {
+      for (Object o : collection) {
         if (b.length() > 0) {
           b.append(',');
         }
@@ -273,8 +273,8 @@ public class ApiClientJersey2 implements ApiClient {
     }
 
     Collection<?> valueCollection;
-    if (value instanceof Collection) {
-      valueCollection = (Collection) value;
+    if (value instanceof Collection collection) {
+      valueCollection = collection;
     } else {
       params.add(new Pair(name, parameterToString(value)));
       return params;

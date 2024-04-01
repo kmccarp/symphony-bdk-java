@@ -29,13 +29,12 @@ import com.symphony.bdk.gen.api.model.UserV2;
 import com.symphony.bdk.http.api.ApiClientBuilderProvider;
 import com.symphony.bdk.http.api.HttpClient;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.apiguardian.api.API;
 
 import java.util.Optional;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * BDK entry point.

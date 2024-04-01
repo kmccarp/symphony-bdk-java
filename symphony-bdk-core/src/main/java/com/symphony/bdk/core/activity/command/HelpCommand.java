@@ -7,13 +7,12 @@ import com.symphony.bdk.core.activity.model.ActivityType;
 import com.symphony.bdk.core.service.message.MessageService;
 import com.symphony.bdk.core.service.message.model.Message;
 
+import jakarta.annotation.Nonnull;
 import org.apiguardian.api.API;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
-import javax.annotation.Nonnull;
 
 /**
  * A help command listing all the commands that can be performed by an end-user through the chat.
@@ -43,7 +42,7 @@ public class HelpCommand extends SlashCommand {
         .filter(info -> info.type().equals(ActivityType.COMMAND))
         .map(info -> {
           String str = "<li>" + info.name() + "%s" + "</li>";
-          return info.description().isEmpty() ? String.format(str, "") : String.format(str, " - " + info.description());
+          return info.description().isEmpty() ? str.formatted("") : String.format(str, " - " + info.description());
         })
         .collect(Collectors.toList());
     if (!activities.isEmpty()) {
@@ -67,8 +66,8 @@ public class HelpCommand extends SlashCommand {
   public boolean equals(Object o) {
     if (this == o) {return true;}
 
-    if (o instanceof SlashCommand) {
-      SlashCommand that = ((SlashCommand) o);
+    if (o instanceof SlashCommand command) {
+      SlashCommand that =command;
       return that.getInfo().name() != null && that.getInfo().name().equals(HELP_COMMAND);
     }
 

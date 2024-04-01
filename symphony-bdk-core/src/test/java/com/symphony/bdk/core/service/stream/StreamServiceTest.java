@@ -9,7 +9,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -718,18 +717,20 @@ public class StreamServiceTest {
 
   @Test
   void listRoomMemberTest() {
-    this.mockApiClient.onGet(V2_ROOM_MEMBERS.replace("{id}", "1234"), "[\n"
-        + "  {\n"
-        + "    \"id\": 7078106103900,\n"
-        + "    \"owner\": false,\n"
-        + "    \"joinDate\": 1461430710531\n"
-        + "  },\n"
-        + "  {\n"
-        + "    \"id\": 7078106103809,\n"
-        + "    \"owner\": true,\n"
-        + "    \"joinDate\": 1461426797875\n"
-        + "  }\n"
-        + "]");
+    this.mockApiClient.onGet(V2_ROOM_MEMBERS.replace("{id}", "1234"), """
+        [
+          {
+            "id": 7078106103900,
+            "owner": false,
+            "joinDate": 1461430710531
+          },
+          {
+            "id": 7078106103809,
+            "owner": true,
+            "joinDate": 1461426797875
+          }
+        ]\
+        """);
 
     List<MemberInfo> memberInfos = this.service.listRoomMembers("1234");
 

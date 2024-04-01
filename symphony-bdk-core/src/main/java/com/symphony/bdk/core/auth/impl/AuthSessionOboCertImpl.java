@@ -5,10 +5,9 @@ import com.symphony.bdk.core.auth.AuthSession;
 import com.symphony.bdk.core.auth.OboAuthenticator;
 import com.symphony.bdk.core.auth.exception.AuthUnauthorizedException;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apiguardian.api.API;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * {@link AuthSession} impl for OBO Certificate authentication mode.

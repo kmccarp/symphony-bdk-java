@@ -6,6 +6,7 @@ import com.symphony.bdk.core.retry.function.ConsumerWithThrowable;
 import com.symphony.bdk.core.retry.function.SupplierWithApiException;
 import com.symphony.bdk.http.api.ApiException;
 
+import jakarta.annotation.Nonnull;
 import org.apiguardian.api.API;
 
 import java.net.ConnectException;
@@ -15,8 +16,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
-
-import javax.annotation.Nonnull;
 
 /**
  * Builder class to facilitate the instantiation of a {@link RetryWithRecovery}.
@@ -79,8 +78,7 @@ public class RetryWithRecoveryBuilder<T> {
    * {@link ApiException#isServerError()}, {@link ApiException#isUnauthorized()} or {@link ApiException#isTooManyRequestsError()}.
    */
   public static boolean isNetworkIssueOrMinorError(Throwable t) {
-    if (t instanceof ApiException) {
-      ApiException apiException = (ApiException) t;
+    if (t instanceof ApiException apiException) {
       return apiException.isServerError() || apiException.isUnauthorized() || apiException.isTooManyRequestsError();
     }
     // keep the datafeed loop running for errors that might be temporary network errors
@@ -98,7 +96,7 @@ public class RetryWithRecoveryBuilder<T> {
    * and also {@link ApiException#isClientError()}
    */
   public static boolean isNetworkIssueOrMinorErrorOrClientError(Throwable t) {
-    return isNetworkIssueOrMinorError(t) || (t instanceof ApiException && ((ApiException) t).isClientError());
+    return isNetworkIssueOrMinorError(t) || (t instanceof ApiException ae && ae.isClientError());
   }
 
   /**
@@ -182,7 +180,7 @@ public class RetryWithRecoveryBuilder<T> {
    * @return the modified builder instance.
    */
   public RetryWithRecoveryBuilder<T> ignoreException(Predicate<ApiException> ignoreException) {
-    this.ignoreException = (e) -> e instanceof ApiException && ignoreException.test((ApiException) e);
+    this.ignoreException = (e) -> e instanceof ApiException ae && ignoreException.test(ae);
     return this;
   }
 

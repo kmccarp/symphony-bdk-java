@@ -23,7 +23,12 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3'
 
     testImplementation project(':symphony-bdk-test:symphony-bdk-test-jupiter')
+    testImplementation "org.junit.jupiter:junit-jupiter:5.10.2"
+    testImplementation "org.mockito:mockito-junit-jupiter:3.12.4"
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+}
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 }

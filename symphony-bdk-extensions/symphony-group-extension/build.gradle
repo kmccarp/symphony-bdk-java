@@ -23,6 +23,7 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.mockito:mockito-core'
+    testImplementation "org.mockito:mockito-junit-jupiter:3.12.4"
     testImplementation 'com.tngtech.archunit:archunit-junit5'
 }
 
@@ -60,4 +61,7 @@ jacocoTestCoverageVerification {
             excludes = ['com.symphony.bdk.ext.group.gen.api.*']
         }
     }
+}
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 }

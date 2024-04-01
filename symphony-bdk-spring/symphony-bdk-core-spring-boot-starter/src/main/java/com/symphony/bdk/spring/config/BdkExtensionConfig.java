@@ -57,8 +57,8 @@ public class BdkExtensionConfig {
     final List<BdkExtensionService> services = new ArrayList<>(extensions.size());
 
     for (BdkExtension extension : extensions) {
-      if (extension instanceof BdkExtensionServiceProvider) {
-        final BdkExtensionService serviceBean = ((BdkExtensionServiceProvider<?>) extension).getService();
+      if (extension instanceof BdkExtensionServiceProvider provider) {
+        final BdkExtensionService serviceBean = provider.getService();
         beanFactory.registerSingleton(serviceBean.getClass().getCanonicalName(), serviceBean);
         services.add(serviceBean);
         log.info("Extension service bean <{}> successfully registered in application context", serviceBean.getClass().getCanonicalName());

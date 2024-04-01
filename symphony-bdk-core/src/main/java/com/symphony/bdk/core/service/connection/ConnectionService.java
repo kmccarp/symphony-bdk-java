@@ -11,13 +11,12 @@ import com.symphony.bdk.gen.api.model.UserConnection;
 import com.symphony.bdk.gen.api.model.UserConnectionRequest;
 import com.symphony.bdk.http.api.ApiException;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apiguardian.api.API;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Service class for managing connection status.

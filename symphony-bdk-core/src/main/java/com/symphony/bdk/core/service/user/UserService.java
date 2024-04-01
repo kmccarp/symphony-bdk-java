@@ -44,6 +44,8 @@ import com.symphony.bdk.gen.api.model.V2UserDetail;
 import com.symphony.bdk.gen.api.model.V2UserList;
 import com.symphony.bdk.http.api.ApiException;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apiguardian.api.API;
@@ -56,9 +58,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 
 /**

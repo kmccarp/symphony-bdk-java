@@ -3,12 +3,11 @@ package com.symphony.bdk.core.service.connection;
 import com.symphony.bdk.core.service.connection.constant.ConnectionStatus;
 import com.symphony.bdk.gen.api.model.UserConnection;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apiguardian.api.API;
 
 import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Service interface exposing OBO-enabled endpoints to manage user connection status.

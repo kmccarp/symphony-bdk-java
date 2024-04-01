@@ -47,7 +47,7 @@ public class GifFormActivity extends FormReplyActivity<FormReplyContext> {
   @Override
   public void onActivity(FormReplyContext context) {
     this.messageService.send(context.getStreamId(),
-        String.format("Gif category is \"%s\"", context.getFormValue("category")));
+        "Gif category is \"%s\"".formatted(context.getFormValue("category")));
   }
 
   @Override

@@ -51,9 +51,11 @@ public class HealthServiceTest {
   @Test
   void v3HealthCheck() {
     this.mockApiClient.onGet(V3_HEALTH_CHECK,
-        "{\n"
-            + "  \"status\": \"UP\"\n"
-            + "}");
+        """
+        {
+          "status": "UP"
+        }\
+        """);
 
     V3Health health = this.service.healthCheck();
 
@@ -70,32 +72,34 @@ public class HealthServiceTest {
   @Test
   void v3HealthCheckExtended() {
     this.mockApiClient.onGet(V3_HEALTH_CHECK_EXTENDED,
-        "{\n"
-            + "  \"status\": \"UP\",\n"
-            + "  \"version\": \"2.57.0\",\n"
-            + "  \"services\": {\n"
-            + "    \"pod\": {\n"
-            + "      \"status\": \"UP\",\n"
-            + "      \"version\": \"1.57.0\"\n"
-            + "    },\n"
-            + "    \"datafeed\": {\n"
-            + "      \"status\": \"UP\",\n"
-            + "      \"version\": \"2.1.28\"\n"
-            + "    },\n"
-            + "    \"key_manager\": {\n"
-            + "      \"status\": \"UP\",\n"
-            + "      \"version\": \"1.56.0\"\n"
-            + "    }\n"
-            + "  },\n"
-            + "  \"users\": {\n"
-            + "    \"agentservice\": {\n"
-            + "      \"status\": \"UP\"\n"
-            + "    },\n"
-            + "    \"ceservice\": {\n"
-            + "      \"status\": \"UP\"\n"
-            + "    }\n"
-            + "  }\n"
-            + "}");
+        """
+        {
+          "status": "UP",
+          "version": "2.57.0",
+          "services": {
+            "pod": {
+              "status": "UP",
+              "version": "1.57.0"
+            },
+            "datafeed": {
+              "status": "UP",
+              "version": "2.1.28"
+            },
+            "key_manager": {
+              "status": "UP",
+              "version": "1.56.0"
+            }
+          },
+          "users": {
+            "agentservice": {
+              "status": "UP"
+            },
+            "ceservice": {
+              "status": "UP"
+            }
+          }
+        }\
+        """);
 
     V3Health health = this.service.healthCheckExtended();
 
@@ -114,14 +118,16 @@ public class HealthServiceTest {
   @Test
   void v1AgentInfo() {
     this.mockApiClient.onGet(V1_AGENT_INFO,
-        "{\n"
-            + "    \"ipAddress\": \"22.222.222.22\",\n"
-            + "    \"hostname\": \"agent-75...4b6\",\n"
-            + "    \"version\": \"Agent-2.55.0-SNAPSHOT-Linux-4.4.86+\",\n"
-            + "    \"url\": \"https://acme.symphony.com:8443/agent\",\n"
-            + "    \"commitId\": \"4a3512e70...e46476d\",\n"
-            + "    \"onPrem\": true\n"
-            + "}");
+        """
+        {
+            "ipAddress": "22.222.222.22",
+            "hostname": "agent-75...4b6",
+            "version": "Agent-2.55.0-SNAPSHOT-Linux-4.4.86+",
+            "url": "https://acme.symphony.com:8443/agent",
+            "commitId": "4a3512e70...e46476d",
+            "onPrem": true
+        }\
+        """);
 
     AgentInfo agentInfo = this.service.getAgentInfo();
 

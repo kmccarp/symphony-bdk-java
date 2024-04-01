@@ -125,8 +125,10 @@ public class SlashAnnotationProcessor implements SmartInitializingSingleton, Bea
       if (isMethodPrototypeValid(m, annotation.value())) {
         this.registerSlashMethod(beanName, m, annotation);
       } else {
-        log.warn("Method '{}' is annotated by @Slash but does not respect the expected prototype. "
-                + "It must accept a first argument of type '{}' and (potential) other arguments based on the slash command pattern.",
+        log.warn("""
+                Method '{}' is annotated by @Slash but does not respect the expected prototype. \
+                It must accept a first argument of type '{}' and (potential) other arguments based on the slash command pattern.\
+                """,
             m, CommandContext.class);
       }
     }

@@ -1,9 +1,8 @@
 package com.symphony.bdk.core.service.pagination.model;
 
+import jakarta.annotation.Nonnull;
 import lombok.Getter;
 import org.apiguardian.api.API;
-
-import javax.annotation.Nonnull;
 
 /**
  * Pagination Attribute model to be used in default pagination methods provided by bdk services class.

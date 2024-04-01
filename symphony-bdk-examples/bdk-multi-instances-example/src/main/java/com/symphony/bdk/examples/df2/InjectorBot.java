@@ -63,7 +63,7 @@ public class InjectorBot {
   private static void sendMessages(SymphonyBdk bdk, String streamId) {
     MessageService messages = bdk.messages();
     for (int i = 0; i < NB_MESSAGES; i++) {
-      messages.send(streamId, String.format("<messageML><b>%s</b> %s</messageML>", i, Instant.now()));
+      messages.send(streamId, "<messageML><b>%s</b> %s</messageML>".formatted(i, Instant.now()));
     }
   }
 

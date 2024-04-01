@@ -14,10 +14,9 @@ import com.symphony.bdk.http.api.ApiClient;
 import com.symphony.bdk.http.api.ApiClientBuilder;
 import com.symphony.bdk.http.api.ApiClientBuilderProvider;
 
+import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
 import org.apiguardian.api.API;
-
-import javax.annotation.Nonnull;
 
 /**
  * Factory responsible for creating {@link ApiClient} instances for each main Symphony's components
@@ -184,8 +183,10 @@ public class ApiClientFactory {
   protected ApiClient buildClientWithCertificate(BdkClientConfig clientConfig, String contextPath,
       BdkAuthenticationConfig config) {
     if (!config.isCertificateAuthenticationConfigured()) {
-      throw new ApiClientInitializationException("For certificate authentication, " +
-          "certificatePath and certificatePassword must be set");
+      throw new ApiClientInitializationException("""
+          For certificate authentication, \
+          certificatePath and certificatePassword must be set\
+          """);
     }
 
     final BdkCertificateConfig certificateConfig = config.getCertificateConfig();
@@ -196,8 +197,10 @@ public class ApiClientFactory {
           .build();
     } catch (IllegalStateException e) {
       String failedCertificateMessage =
-          String.format("Failed while trying to parse the certificate at following path: %s."
-                  + " Check configuration is done properly and that certificate is in the correct format.",
+          ("""
+              Failed while trying to parse the certificate at following path: %s.\
+               Check configuration is done properly and that certificate is in the correct format.\
+              """).formatted(
               certificateConfig.getPath());
       log.error(failedCertificateMessage);
       throw new IllegalStateException(failedCertificateMessage, e);

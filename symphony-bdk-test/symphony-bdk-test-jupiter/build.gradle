@@ -10,6 +10,7 @@ dependencies {
     api project(':symphony-bdk-template:symphony-bdk-template-api')
 
     implementation project(':symphony-bdk-template:symphony-bdk-template-freemarker')
+    testImplementation "org.junit.jupiter:junit-jupiter:5.10.2"
 
     api 'org.junit.jupiter:junit-jupiter-api'
     api 'org.junit.jupiter:junit-jupiter-engine'
@@ -19,4 +20,7 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+}
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 }

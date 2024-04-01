@@ -22,8 +22,10 @@ public interface OboService<S> {
 
   default void checkAuthSession(AuthSession oboSession) {
     if (oboSession == null) {
-      throw new IllegalStateException("Trying to call an endpoint with no configured bot session, "
-          + "please call method obo(oboSession) first");
+      throw new IllegalStateException("""
+          Trying to call an endpoint with no configured bot session, \
+          please call method obo(oboSession) first\
+          """);
     }
   }
 }

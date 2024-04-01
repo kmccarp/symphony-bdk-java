@@ -54,7 +54,7 @@ dependencies {
     implementation 'io.swagger:swagger-annotations'
     implementation 'com.google.code.findbugs:jsr305'
     implementation 'javax.annotation:jsr250-api:1.0'
-    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.2'
     implementation 'jakarta.ws.rs:jakarta.ws.rs-api'
 
     testImplementation project(':symphony-bdk-http:symphony-bdk-http-jersey2')
@@ -67,6 +67,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
     testImplementation 'com.tngtech.archunit:archunit-junit5'
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.10.2"
     testImplementation 'ch.qos.logback:logback-classic'
     testImplementation 'org.mock-server:mockserver-netty'
     testImplementation 'org.mockito:mockito-core'
@@ -127,3 +128,6 @@ apisToGenerate.each { api, path ->
 
 // Duplicated AuthRequest class, we need the one from auth API, so task order matters here
 tasks.generateAuth.dependsOn tasks.generateLogin
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}

@@ -69,7 +69,7 @@ public class ReaderBot {
               return;
             }
             bdk.messages().send(event.getMessage().getStream(),
-                String.format("<messageML><span style=\"color: %s;\">%s <b>%s</b></span></messageML>",
+                "<messageML><span style=\"color: %s;\">%s <b>%s</b></span></messageML>".formatted(
                     color, textContent, id));
             processedEvents.put(event.getMessage().getMessageId(), "processed", 1, TimeUnit.MINUTES);
 
@@ -93,6 +93,6 @@ public class ReaderBot {
   private static String randomColor() {
     Random random = new Random();
     int nextInt = random.nextInt(0xffffff + 1);
-    return String.format("#%06x", nextInt);
+    return "#%06x".formatted(nextInt);
   }
 }

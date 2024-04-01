@@ -1,7 +1,5 @@
 package com.symphony.bdk.test.mockito;
 
-import static org.mockito.ArgumentMatchers.argThat;
-
 import com.symphony.bdk.core.service.message.model.Message;
 import com.symphony.bdk.test.mockito.matcher.MessageContains;
 import com.symphony.bdk.test.mockito.matcher.MessageEquals;

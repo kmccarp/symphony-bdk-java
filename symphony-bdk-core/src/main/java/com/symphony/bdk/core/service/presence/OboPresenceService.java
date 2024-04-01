@@ -3,12 +3,11 @@ package com.symphony.bdk.core.service.presence;
 import com.symphony.bdk.core.service.presence.constant.PresenceStatus;
 import com.symphony.bdk.gen.api.model.V2Presence;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apiguardian.api.API;
 
 import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Service interface exposing OBO-enabled endpoints to manage user presence information.

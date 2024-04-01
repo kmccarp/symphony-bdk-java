@@ -67,14 +67,16 @@ public class SignalServiceTest {
   @Test
   void testGetSignalOboMode() {
     this.mockApiClient.onGet(V1_GET_SIGNAL.replace("{id}", "1234"),
-        "{\n"
-            + "    \"name\": \"my signal\",\n"
-            + "    \"query\": \"HASHTAG:hashtag AND CASHTAG:cash\",\n"
-            + "    \"visibleOnProfile\": true,\n"
-            + "    \"companyWide\": false,\n"
-            + "    \"id\": \"5a8daa0bb9d82100011d5095\",\n"
-            + "    \"timestamp\": 1519233547982\n"
-            + "}");
+        """
+        {
+            "name": "my signal",
+            "query": "HASHTAG:hashtag AND CASHTAG:cash",
+            "visibleOnProfile": true,
+            "companyWide": false,
+            "id": "5a8daa0bb9d82100011d5095",
+            "timestamp": 1519233547982
+        }\
+        """);
 
     this.service = new SignalService(this.spiedSignalApi, new RetryWithRecoveryBuilder<>());
     final Signal signal = this.service.obo(this.authSession).getSignal("1234");
@@ -85,16 +87,18 @@ public class SignalServiceTest {
   @Test
   void listSignalTest() {
     this.mockApiClient.onGet(V1_LIST_SIGNAL,
-        "[\n"
-            + "  {\n"
-            + "    \"name\": \"Mention and keyword\",\n"
-            + "    \"query\": \"HASHTAG:Hello OR POSTEDBY:10854618893681\",\n"
-            + "    \"visibleOnProfile\": false,\n"
-            + "    \"companyWide\": false,\n"
-            + "    \"id\": \"5a0068344b570777718322a3\",\n"
-            + "    \"timestamp\": 1509976116525\n"
-            + "  }\n"
-            + "]");
+        """
+        [
+          {
+            "name": "Mention and keyword",
+            "query": "HASHTAG:Hello OR POSTEDBY:10854618893681",
+            "visibleOnProfile": false,
+            "companyWide": false,
+            "id": "5a0068344b570777718322a3",
+            "timestamp": 1509976116525
+          }
+        ]\
+        """);
 
     List<Signal> signals = this.service.listSignals(new PaginationAttribute(0, 100));
 
@@ -106,16 +110,18 @@ public class SignalServiceTest {
   @Test
   void listSignalsDefaultLimit() {
     this.mockApiClient.onGet(V1_LIST_SIGNAL,
-        "[\n"
-            + "  {\n"
-            + "    \"name\": \"Mention and keyword\",\n"
-            + "    \"query\": \"HASHTAG:Hello OR POSTEDBY:10854618893681\",\n"
-            + "    \"visibleOnProfile\": false,\n"
-            + "    \"companyWide\": false,\n"
-            + "    \"id\": \"5a0068344b570777718322a3\",\n"
-            + "    \"timestamp\": 1509976116525\n"
-            + "  }\n"
-            + "]");
+        """
+        [
+          {
+            "name": "Mention and keyword",
+            "query": "HASHTAG:Hello OR POSTEDBY:10854618893681",
+            "visibleOnProfile": false,
+            "companyWide": false,
+            "id": "5a0068344b570777718322a3",
+            "timestamp": 1509976116525
+          }
+        ]\
+        """);
 
     List<Signal> signals = this.service.listSignals();
 
@@ -134,16 +140,18 @@ public class SignalServiceTest {
   @Test
   void listSignalStreamTest() {
     this.mockApiClient.onGet(V1_LIST_SIGNAL,
-        "[\n"
-            + "  {\n"
-            + "    \"name\": \"Mention and keyword\",\n"
-            + "    \"query\": \"HASHTAG:Hello OR POSTEDBY:10854618893681\",\n"
-            + "    \"visibleOnProfile\": false,\n"
-            + "    \"companyWide\": false,\n"
-            + "    \"id\": \"5a0068344b570777718322a3\",\n"
-            + "    \"timestamp\": 1509976116525\n"
-            + "  }\n"
-            + "]");
+        """
+        [
+          {
+            "name": "Mention and keyword",
+            "query": "HASHTAG:Hello OR POSTEDBY:10854618893681",
+            "visibleOnProfile": false,
+            "companyWide": false,
+            "id": "5a0068344b570777718322a3",
+            "timestamp": 1509976116525
+          }
+        ]\
+        """);
 
     Stream<Signal> signals = this.service.listAllSignals(new StreamPaginationAttribute(2, 2));
     List<Signal> signalList = signals.collect(Collectors.toList());
@@ -155,16 +163,18 @@ public class SignalServiceTest {
   @Test
   void listSignalStreamDefaultPagination() {
     this.mockApiClient.onGet(V1_LIST_SIGNAL,
-        "[\n"
-            + "  {\n"
-            + "    \"name\": \"Mention and keyword\",\n"
-            + "    \"query\": \"HASHTAG:Hello OR POSTEDBY:10854618893681\",\n"
-            + "    \"visibleOnProfile\": false,\n"
-            + "    \"companyWide\": false,\n"
-            + "    \"id\": \"5a0068344b570777718322a3\",\n"
-            + "    \"timestamp\": 1509976116525\n"
-            + "  }\n"
-            + "]");
+        """
+        [
+          {
+            "name": "Mention and keyword",
+            "query": "HASHTAG:Hello OR POSTEDBY:10854618893681",
+            "visibleOnProfile": false,
+            "companyWide": false,
+            "id": "5a0068344b570777718322a3",
+            "timestamp": 1509976116525
+          }
+        ]\
+        """);
 
     Stream<Signal> signals = this.service.listAllSignals();
     List<Signal> signalList = signals.collect(Collectors.toList());
@@ -176,14 +186,16 @@ public class SignalServiceTest {
   @Test
   void getSignalTest() {
     this.mockApiClient.onGet(V1_GET_SIGNAL.replace("{id}", "1234"),
-        "{\n"
-            + "    \"name\": \"my signal\",\n"
-            + "    \"query\": \"HASHTAG:hashtag AND CASHTAG:cash\",\n"
-            + "    \"visibleOnProfile\": true,\n"
-            + "    \"companyWide\": false,\n"
-            + "    \"id\": \"5a8daa0bb9d82100011d5095\",\n"
-            + "    \"timestamp\": 1519233547982\n"
-            + "}");
+        """
+        {
+            "name": "my signal",
+            "query": "HASHTAG:hashtag AND CASHTAG:cash",
+            "visibleOnProfile": true,
+            "companyWide": false,
+            "id": "5a8daa0bb9d82100011d5095",
+            "timestamp": 1519233547982
+        }\
+        """);
 
     Signal signal = this.service.getSignal("1234");
 
@@ -202,14 +214,16 @@ public class SignalServiceTest {
   @Test
   void createSignalTest() {
     this.mockApiClient.onPost(V1_CREATE_SIGNAL,
-        "{\n"
-            + "    \"name\": \"hash and cash\",\n"
-            + "    \"query\": \"HASHTAG:hash AND CASHTAG:cash\",\n"
-            + "    \"visibleOnProfile\": true,\n"
-            + "    \"companyWide\": false,\n"
-            + "    \"id\": \"5a8da7edb9d82100011d508f\",\n"
-            + "    \"timestamp\": 1519233005107\n"
-            + "}");
+        """
+        {
+            "name": "hash and cash",
+            "query": "HASHTAG:hash AND CASHTAG:cash",
+            "visibleOnProfile": true,
+            "companyWide": false,
+            "id": "5a8da7edb9d82100011d508f",
+            "timestamp": 1519233005107
+        }\
+        """);
 
     Signal signal = this.service.createSignal(new BaseSignal());
 
@@ -228,14 +242,16 @@ public class SignalServiceTest {
   @Test
   void updateSignalTest() {
     this.mockApiClient.onPost(V1_UPDATE_SIGNAL.replace("{id}", "1234"),
-        "{\n"
-            + "    \"name\": \"hashtag only\",\n"
-            + "    \"query\": \"HASHTAG:hash\",\n"
-            + "    \"visibleOnProfile\": false,\n"
-            + "    \"companyWide\": false,\n"
-            + "    \"id\": \"1234\",\n"
-            + "    \"timestamp\": 1519233005107\n"
-            + "}");
+        """
+        {
+            "name": "hashtag only",
+            "query": "HASHTAG:hash",
+            "visibleOnProfile": false,
+            "companyWide": false,
+            "id": "1234",
+            "timestamp": 1519233005107
+        }\
+        """);
 
     Signal signal = this.service.updateSignal("1234", new BaseSignal());
 
@@ -270,12 +286,14 @@ public class SignalServiceTest {
   @Test
   void subscribeSignalTest() throws ApiException {
     this.mockApiClient.onPost(V1_SUBSCRIBE_SIGNAL.replace("{id}", "1234"),
-        "{\n"
-            + "    \"requestedSubscription\": 3,\n"
-            + "    \"successfulSubscription\": 3,\n"
-            + "    \"failedSubscription\": 0,\n"
-            + "    \"subscriptionErrors\": []\n"
-            + "}");
+        """
+        {
+            "requestedSubscription": 3,
+            "successfulSubscription": 3,
+            "failedSubscription": 0,
+            "subscriptionErrors": []
+        }\
+        """);
 
     ChannelSubscriptionResponse response =
         this.service.subscribeUsersToSignal("1234", true, Arrays.asList(1234L, 1235L, 1236L));
@@ -296,12 +314,14 @@ public class SignalServiceTest {
   @Test
   void unsubscribeSignalTest() throws ApiException {
     this.mockApiClient.onPost(V1_UNSUBSCRIBE_SIGNAL.replace("{id}", "1234"),
-        "{\n"
-            + "    \"requestedSubscription\": 3,\n"
-            + "    \"successfulSubscription\": 3,\n"
-            + "    \"failedSubscription\": 0,\n"
-            + "    \"subscriptionErrors\": []\n"
-            + "}");
+        """
+        {
+            "requestedSubscription": 3,
+            "successfulSubscription": 3,
+            "failedSubscription": 0,
+            "subscriptionErrors": []
+        }\
+        """);
 
     ChannelSubscriptionResponse response =
         this.service.unsubscribeUsersFromSignal("1234", Arrays.asList(1234L, 1235L, 1236L));
@@ -322,20 +342,22 @@ public class SignalServiceTest {
   @Test
   void subscribersTest() {
     this.mockApiClient.onGet(V1_SUBSCRIBERS.replace("{id}", "1234"),
-        "{\n"
-            + "    \"offset\": 0,\n"
-            + "    \"hasMore\": true,\n"
-            + "    \"total\": 150,\n"
-            + "    \"data\": [\n"
-            + "        {\n"
-            + "            \"pushed\": false,\n"
-            + "            \"owner\": true,\n"
-            + "            \"subscriberName\": \"John Doe 01\",\n"
-            + "            \"userId\": 68719476742,\n"
-            + "            \"timestamp\": 1519231972000\n"
-            + "        }\n"
-            + "    ]\n"
-            + "}");
+        """
+        {
+            "offset": 0,
+            "hasMore": true,
+            "total": 150,
+            "data": [
+                {
+                    "pushed": false,
+                    "owner": true,
+                    "subscriberName": "John Doe 01",
+                    "userId": 68719476742,
+                    "timestamp": 1519231972000
+                }
+            ]
+        }\
+        """);
 
     List<ChannelSubscriber> subscribers = this.service.listSubscribers("1234", new PaginationAttribute(0, 100));
 
@@ -347,20 +369,22 @@ public class SignalServiceTest {
   @Test
   void subscribersDefaultLimit() {
     this.mockApiClient.onGet(V1_SUBSCRIBERS.replace("{id}", "1234"),
-        "{\n"
-            + "    \"offset\": 0,\n"
-            + "    \"hasMore\": true,\n"
-            + "    \"total\": 150,\n"
-            + "    \"data\": [\n"
-            + "        {\n"
-            + "            \"pushed\": false,\n"
-            + "            \"owner\": true,\n"
-            + "            \"subscriberName\": \"John Doe 01\",\n"
-            + "            \"userId\": 68719476742,\n"
-            + "            \"timestamp\": 1519231972000\n"
-            + "        }\n"
-            + "    ]\n"
-            + "}");
+        """
+        {
+            "offset": 0,
+            "hasMore": true,
+            "total": 150,
+            "data": [
+                {
+                    "pushed": false,
+                    "owner": true,
+                    "subscriberName": "John Doe 01",
+                    "userId": 68719476742,
+                    "timestamp": 1519231972000
+                }
+            ]
+        }\
+        """);
 
     List<ChannelSubscriber> subscribers = this.service.listSubscribers("1234");
 
@@ -380,20 +404,22 @@ public class SignalServiceTest {
   @Test
   void subscribersStreamTest() {
     this.mockApiClient.onGet(V1_SUBSCRIBERS.replace("{id}", "1234"),
-        "{\n"
-            + "    \"offset\": 0,\n"
-            + "    \"hasMore\": true,\n"
-            + "    \"total\": 150,\n"
-            + "    \"data\": [\n"
-            + "        {\n"
-            + "            \"pushed\": false,\n"
-            + "            \"owner\": true,\n"
-            + "            \"subscriberName\": \"John Doe 01\",\n"
-            + "            \"userId\": 68719476742,\n"
-            + "            \"timestamp\": 1519231972000\n"
-            + "        }\n"
-            + "    ]\n"
-            + "}");
+        """
+        {
+            "offset": 0,
+            "hasMore": true,
+            "total": 150,
+            "data": [
+                {
+                    "pushed": false,
+                    "owner": true,
+                    "subscriberName": "John Doe 01",
+                    "userId": 68719476742,
+                    "timestamp": 1519231972000
+                }
+            ]
+        }\
+        """);
 
     Stream<ChannelSubscriber> subscribers =
         this.service.listAllSubscribers("1234", new StreamPaginationAttribute(2, 2));
@@ -407,20 +433,22 @@ public class SignalServiceTest {
   @Test
   void subscribersStreamDefaultPagination() {
     this.mockApiClient.onGet(V1_SUBSCRIBERS.replace("{id}", "1234"),
-        "{\n"
-            + "    \"offset\": 0,\n"
-            + "    \"hasMore\": true,\n"
-            + "    \"total\": 150,\n"
-            + "    \"data\": [\n"
-            + "        {\n"
-            + "            \"pushed\": false,\n"
-            + "            \"owner\": true,\n"
-            + "            \"subscriberName\": \"John Doe 01\",\n"
-            + "            \"userId\": 68719476742,\n"
-            + "            \"timestamp\": 1519231972000\n"
-            + "        }\n"
-            + "    ]\n"
-            + "}");
+        """
+        {
+            "offset": 0,
+            "hasMore": true,
+            "total": 150,
+            "data": [
+                {
+                    "pushed": false,
+                    "owner": true,
+                    "subscriberName": "John Doe 01",
+                    "userId": 68719476742,
+                    "timestamp": 1519231972000
+                }
+            ]
+        }\
+        """);
 
     Stream<ChannelSubscriber> subscribers = this.service.listAllSubscribers("1234");
     List<ChannelSubscriber> subscriberList = subscribers.collect(Collectors.toList());

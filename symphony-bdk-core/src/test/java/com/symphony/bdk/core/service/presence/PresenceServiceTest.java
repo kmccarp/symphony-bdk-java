@@ -64,11 +64,13 @@ public class PresenceServiceTest {
     this.service = new PresenceService(spiedPresenceApi, new RetryWithRecoveryBuilder<>());
 
     this.mockApiClient.onGet(V2_GET_PRESENCE,
-        "{\n"
-            + "    \"category\": \"AVAILABLE\",\n"
-            + "    \"userId\": 14568529068038,\n"
-            + "    \"timestamp\": 1533928483800\n"
-            + "}");
+        """
+        {
+            "category": "AVAILABLE",
+            "userId": 14568529068038,
+            "timestamp": 1533928483800
+        }\
+        """);
 
     final V2Presence presence = this.service.obo(this.authSession).getPresence();
 
@@ -79,11 +81,13 @@ public class PresenceServiceTest {
   @Test
   void getPresenceTest() {
     this.mockApiClient.onGet(V2_GET_PRESENCE,
-        "{\n"
-            + "    \"category\": \"AVAILABLE\",\n"
-            + "    \"userId\": 14568529068038,\n"
-            + "    \"timestamp\": 1533928483800\n"
-            + "}");
+        """
+        {
+            "category": "AVAILABLE",
+            "userId": 14568529068038,
+            "timestamp": 1533928483800
+        }\
+        """);
 
     V2Presence presence = this.service.getPresence();
 
@@ -100,18 +104,20 @@ public class PresenceServiceTest {
 
   @Test
   void getAllUserPresenceTest() {
-    this.mockApiClient.onGet(V2_GET_ALL_PRESENCE, "[\n"
-        + "  {\n"
-        + "    \"category\": \"AVAILABLE\",\n"
-        + "    \"userId\": 14568529068038,\n"
-        + "    \"timestamp\": 1533928483800\n"
-        + "  },\n"
-        + "  {\n"
-        + "    \"category\": \"OFFLINE\",\n"
-        + "    \"userId\": 974217539631,\n"
-        + "    \"timestamp\": 1503286226030\n"
-        + "  }  \n"
-        + "]");
+    this.mockApiClient.onGet(V2_GET_ALL_PRESENCE, """
+        [
+          {
+            "category": "AVAILABLE",
+            "userId": 14568529068038,
+            "timestamp": 1533928483800
+          },
+          {
+            "category": "OFFLINE",
+            "userId": 974217539631,
+            "timestamp": 1503286226030
+          } \s
+        ]\
+        """);
 
     List<V2Presence> presenceList = this.service.listPresences(1234L, 5000);
 
@@ -132,11 +138,13 @@ public class PresenceServiceTest {
   @Test
   void getUserPresenceTest() {
     this.mockApiClient.onGet(V2_GET_USER_PRESENCE.replace("{uid}", "12345"),
-        "{\n"
-            + "  \"category\": \"AVAILABLE\",\n"
-            + "  \"userId\": 349871117483,\n"
-            + "  \"timestamp\": 1503285368906\n"
-            + "}");
+        """
+        {
+          "category": "AVAILABLE",
+          "userId": 349871117483,
+          "timestamp": 1503285368906
+        }\
+        """);
 
     V2Presence presence = this.service.getUserPresence(12345L, true);
 
@@ -171,11 +179,13 @@ public class PresenceServiceTest {
   @Test
   void setPresenceTest() {
     this.mockApiClient.onPost(V2_SET_PRESENCE,
-        "{\n"
-            + "  \"category\": \"AWAY\",\n"
-            + "  \"userId\": 349871117483,\n"
-            + "  \"timestamp\": 1503286569882\n"
-            + "}");
+        """
+        {
+          "category": "AWAY",
+          "userId": 349871117483,
+          "timestamp": 1503286569882
+        }\
+        """);
 
     V2Presence presence = this.service.setPresence(PresenceStatus.AWAY, true);
 
@@ -193,9 +203,11 @@ public class PresenceServiceTest {
   @Test
   void createPresenceFeedTest() {
     this.mockApiClient.onPost(V1_CREATE_PRESENCE_FEED,
-        "{\n"
-            + "  \"id\": \"c4dca251-8639-48db-a9d4-f387089e17cf\"\n"
-            + "}");
+        """
+        {
+          "id": "c4dca251-8639-48db-a9d4-f387089e17cf"
+        }\
+        """);
 
     String feedId = this.service.createPresenceFeed();
 
@@ -212,18 +224,20 @@ public class PresenceServiceTest {
   @Test
   void readPresenceFeedTest() {
     this.mockApiClient.onGet(V1_READ_PRESENCE_FEED.replace("{feedId}", "1234"),
-        "[\n"
-            + "  { \n"
-            + "    \"category\": \"AVAILABLE\", \n"
-            + "    \"userId\": \"7078106103901\", \n"
-            + "    \"timestamp\": \"1489769156271\"\n"
-            + "  },\n"
-            + "  { \n"
-            + "    \"category\": \"ON_THE_PHONE\", \n"
-            + "    \"userId\": \"7078106103902\", \n"
-            + "    \"timestamp\": \"1489769156273\"\n"
-            + "  }\n"
-            + "]");
+        """
+        [
+          {\s
+            "category": "AVAILABLE",\s
+            "userId": "7078106103901",\s
+            "timestamp": "1489769156271"
+          },
+          {\s
+            "category": "ON_THE_PHONE",\s
+            "userId": "7078106103902",\s
+            "timestamp": "1489769156273"
+          }
+        ]\
+        """);
     
     List<V2Presence> presenceList = this.service.readPresenceFeed("1234");
     
@@ -244,9 +258,11 @@ public class PresenceServiceTest {
   @Test
   void deletePresenceFeedTest() {
     this.mockApiClient.onPost(V1_DELETE_PRESENCE_FEED.replace("{feedId}", "1234"),
-        "{\n"
-            + "  \"id\": \"1234\"\n"
-            + "}");
+        """
+        {
+          "id": "1234"
+        }\
+        """);
 
     String feedId = this.service.deletePresenceFeed("1234");
 
@@ -263,11 +279,13 @@ public class PresenceServiceTest {
   @Test
   void setUserPresenceTest() {
     this.mockApiClient.onPost(V3_SET_USER_PRESENCE,
-        "{\n"
-            + "  \"category\": \"BUSY\",\n"
-            + "  \"userId\": 349871117483,\n"
-            + "  \"timestamp\": 1503286872978\n"
-            + "}");
+        """
+        {
+          "category": "BUSY",
+          "userId": 349871117483,
+          "timestamp": 1503286872978
+        }\
+        """);
 
     V2Presence presence = this.service.setUserPresence(349871117483L, PresenceStatus.BUSY, true);
 

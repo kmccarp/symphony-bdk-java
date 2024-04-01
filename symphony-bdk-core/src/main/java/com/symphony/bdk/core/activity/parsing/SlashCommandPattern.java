@@ -46,9 +46,11 @@ public class SlashCommandPattern {
     try {
       this.tokens = buildTokens(pattern);
     } catch (PatternSyntaxException e) {
-      throw new SlashCommandSyntaxException("Bad slash command pattern."
-          + "Slash command pattern must be either words separated by spaces "
-          + "or aguments in the format {argumentName}, {@mentionArg}, {#hashtagArg}, {$cashtagArg} separated by spaces",
+      throw new SlashCommandSyntaxException("""
+          Bad slash command pattern.\
+          Slash command pattern must be either words separated by spaces \
+          or aguments in the format {argumentName}, {@mentionArg}, {#hashtagArg}, {$cashtagArg} separated by spaces\
+          """,
           e);
     }
   }

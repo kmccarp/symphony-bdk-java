@@ -6,9 +6,8 @@ import com.symphony.bdk.core.auth.exception.AuthUnauthorizedException;
 import com.symphony.bdk.core.auth.jwt.UserClaim;
 import com.symphony.bdk.gen.api.model.PodCertificate;
 
+import jakarta.annotation.Nonnull;
 import org.apiguardian.api.API;
-
-import javax.annotation.Nonnull;
 
 /**
  * Extension App Authenticator Service.

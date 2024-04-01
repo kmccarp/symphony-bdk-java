@@ -26,14 +26,11 @@ import com.symphony.bdk.gen.api.model.V4UserLeftRoom;
 import com.symphony.bdk.gen.api.model.V4UserRequestedToJoinRoom;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @SpringBootTest
-@ExtendWith(SpringExtension.class)
 class RealTimeEventsDispatcherTest {
 
   @Autowired

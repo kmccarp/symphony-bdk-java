@@ -75,14 +75,35 @@ class SymphonyBdkHealthIndicatorTest {
   @Test
   void doHealthCheck_exception() throws Exception {
     final String body =
-        "{\n" + "  \"status\": \"UP\",\n" + "  \"version\": \"2.57.0\",\n" + "  \"services\": {\n" + "    \"pod\": {\n"
-            + "      \"status\": \"UP\",\n" + "      \"version\": \"1.57.0\"\n" + "    },\n" + "    \"datafeed\": {\n"
-            + "      \"status\": \"UP\",\n" + "      \"version\": \"2.1.28\"\n" + "    },\n"
-            + "    \"key_manager\": {\n" + "      \"status\": \"UP\",\n" + "      \"version\": \"1.56.0\"\n" + "    }\n"
-            + "  },\n" + "  \"users\": {\n" + "    \"agentservice\": {\n" + "      \"status\": \"DOWN\"\n" + "    },\n"
-            + "    \"ceservice\": {\n" + "      \"status\": \"DOWN\",\n"
-            + "      \"message\": \"Ceservice authentication credentials missing or misconfigured\"\n" + "    }\n"
-            + "  }\n" + "}";
+        """
+        {
+          "status": "UP",
+          "version": "2.57.0",
+          "services": {
+            "pod": {
+              "status": "UP",
+              "version": "1.57.0"
+            },
+            "datafeed": {
+              "status": "UP",
+              "version": "2.1.28"
+            },
+            "key_manager": {
+              "status": "UP",
+              "version": "1.56.0"
+            }
+          },
+          "users": {
+            "agentservice": {
+              "status": "DOWN"
+            },
+            "ceservice": {
+              "status": "DOWN",
+              "message": "Ceservice authentication credentials missing or misconfigured"
+            }
+          }
+        }\
+        """;
 
     doThrow(new ApiRuntimeException(new ApiException(503, "message", Map.of(), body))).when(healthService)
         .healthCheckExtended();
@@ -95,8 +116,14 @@ class SymphonyBdkHealthIndicatorTest {
 
   @Test
   void doHealthCheck_badGw_exception() throws Exception {
-    final String body = "<html>\n" + "<head><title>502 Bad Gateway</title></head>\n" + "<body>\n"
-        + "<center><h1>502 Bad Gateway</h1></center>\n" + "</body>\n" + "</html>";
+    final String body = """
+        <html>
+        <head><title>502 Bad Gateway</title></head>
+        <body>
+        <center><h1>502 Bad Gateway</h1></center>
+        </body>
+        </html>\
+        """;
 
     doThrow(new ApiRuntimeException(new ApiException(502, "message", Map.of(), body))).when(healthService)
         .healthCheckExtended();

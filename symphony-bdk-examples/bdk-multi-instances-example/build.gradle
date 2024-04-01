@@ -15,3 +15,6 @@ dependencies {
 
     runtimeOnly 'ch.qos.logback:logback-classic'
 }
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}

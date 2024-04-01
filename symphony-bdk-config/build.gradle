@@ -25,3 +25,6 @@ dependencies {
     testImplementation 'ch.qos.logback:logback-classic'
     testImplementation 'org.assertj:assertj-core'
 }
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}

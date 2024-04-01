@@ -6,13 +6,13 @@ import com.symphony.bdk.core.config.model.BdkRetryConfig;
 import com.symphony.bdk.http.api.ApiException;
 import com.symphony.bdk.http.api.ApiRuntimeException;
 import io.netty.channel.ConnectTimeoutException;
+import jakarta.annotation.Nonnull;
 import jakarta.ws.rs.ProcessingException;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 
-import javax.annotation.Nonnull;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.URI;

@@ -6,13 +6,12 @@ import com.symphony.bdk.core.auth.jwt.JwtHelper;
 import com.symphony.bdk.gen.api.model.Token;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apiguardian.api.API;
 
 import java.time.Duration;
 import java.time.Instant;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 
 /**
@@ -61,8 +60,10 @@ public class AuthSessionImpl implements AuthSession {
   public @Nullable
   String getAuthorizationToken() throws AuthUnauthorizedException {
     if(this.authorizationToken == null || this.authTokenExpirationDate == null) {
-      throw new UnsupportedOperationException("Common JWT feature is not available in your pod, "
-          + "SBE version should be at least 20.14.");
+      throw new UnsupportedOperationException("""
+          Common JWT feature is not available in your pod, \
+          SBE version should be at least 20.14.\
+          """);
     }
     if (Instant.now().plus(LEEWAY).isAfter(Instant.ofEpochSecond(authTokenExpirationDate))) {
       refresh();

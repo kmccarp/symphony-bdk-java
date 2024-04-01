@@ -12,12 +12,11 @@ import com.symphony.bdk.gen.api.model.V2PresenceStatus;
 import com.symphony.bdk.gen.api.model.V2UserPresence;
 import com.symphony.bdk.http.api.ApiException;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apiguardian.api.API;
 
 import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Service class for managing user presence information.

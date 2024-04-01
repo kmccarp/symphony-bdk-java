@@ -46,8 +46,8 @@ public final class ApiUtils {
     // Loads default Root CA certificates (generally, from JAVA_HOME/lib/cacerts)
     trustManagerFactory.init((KeyStore)null);
     for (TrustManager trustManager : trustManagerFactory.getTrustManagers()) {
-      if (trustManager instanceof X509TrustManager) {
-        for (X509Certificate acceptedIssuer : ((X509TrustManager) trustManager).getAcceptedIssuers()) {
+      if (trustManager instanceof X509TrustManager manager) {
+        for (X509Certificate acceptedIssuer : manager.getAcceptedIssuers()) {
           trustStore.setCertificateEntry(acceptedIssuer.getSubjectDN().getName(), acceptedIssuer);
         }
       }

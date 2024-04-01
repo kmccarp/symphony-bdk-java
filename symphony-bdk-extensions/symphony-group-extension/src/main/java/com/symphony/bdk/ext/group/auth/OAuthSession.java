@@ -13,11 +13,10 @@ import com.symphony.bdk.http.api.ApiResponse;
 import com.symphony.bdk.http.api.util.TypeReference;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.annotation.Nonnull;
 import lombok.Getter;
 import lombok.Setter;
 import org.apiguardian.api.API;
-
-import javax.annotation.Nonnull;
 
 @API(status = API.Status.INTERNAL)
 public class OAuthSession {

@@ -50,7 +50,7 @@ public class SampleBdkIntegrationTest {
     final SlashCommand slashCommand = SlashCommand.slash("/echo {argument}", false,
         context -> bdk.messages()
             .send(context.getStreamId(),
-                String.format("Received argument: %s", context.getArguments().get("argument"))),
+            "Received argument: %s".formatted(context.getArguments().get("argument"))),
         "echo slash command");
     bdk.activities().register(slashCommand);
 
@@ -108,7 +108,7 @@ public class SampleBdkIntegrationTest {
     @Override
     public void onActivity(FormReplyContext context) {
       this.messageService.send(context.getStreamId(),
-          String.format("Gif category is \"%s\"", context.getFormValue("category")));
+          "Gif category is \"%s\"".formatted(context.getFormValue("category")));
     }
 
     @Override

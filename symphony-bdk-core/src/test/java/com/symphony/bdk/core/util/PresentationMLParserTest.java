@@ -20,8 +20,11 @@ class PresentationMLParserTest {
   static Stream<Arguments> validPresentationMLs() {
     return Stream.of(
         arguments(
-            "<div data-format=\"PresentationML\" data-version=\"2.0\">\n"
-                + "<a href=\"http://www.symphony.com\">This is a link to Symphony's Website</a>\n</div>",
+            """
+            <div data-format="PresentationML" data-version="2.0">
+            <a href="http://www.symphony.com">This is a link to Symphony's Website</a>
+            </div>\
+            """,
             "This is a link to Symphony's Website"),
         arguments("<div data-format=\"PresentationML\" data-version=\"2.0\"> <p>/test &lt;/messageML&gt;</p> </div>",
             "/test </messageML>"),
@@ -45,9 +48,11 @@ class PresentationMLParserTest {
 
   @Test
   void getMessageFromPresentationMLNotTrimTest() throws PresentationMLParserException {
-    String presentationML = "<div data-format=\"PresentationML\" data-version=\"2.0\"> \n"
-        + "  <a href=\"http://www.symphony.com\">This is a link to Symphony's Website</a> \n"
-        + "</div>";
+    String presentationML = """
+        <div data-format="PresentationML" data-version="2.0">\s
+          <a href="http://www.symphony.com">This is a link to Symphony's Website</a>\s
+        </div>\
+        """;
 
     String content = PresentationMLParser.getTextContent(presentationML, false);
 
@@ -57,9 +62,11 @@ class PresentationMLParserTest {
 
   @Test
   void getMessageFromPresentationMLFailedToParse() {
-    String presentationML = "<div data-format=\"PresentationML\" data-version=\"2.0\"> \n"
-        + "  <a href=\"http://www.symphony.com\">This is a link to Symphony's Website<a> \n"
-        + "</div>";
+    String presentationML = """
+        <div data-format="PresentationML" data-version="2.0">\s
+          <a href="http://www.symphony.com">This is a link to Symphony's Website<a>\s
+        </div>\
+        """;
 
     assertThrows(PresentationMLParserException.class, () -> PresentationMLParser.getTextContent(presentationML));
   }

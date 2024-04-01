@@ -183,12 +183,14 @@ public class SymphonyBdkTest {
 
   @Test
   void extAppAuthenticateTest() throws AuthUnauthorizedException {
-    this.mockApiClient.onPost(LOGIN_PUBKEY_V1_EXTENSION_APP_AUTHENTICATE,"{\n"
-        + "  \"appId\" : \"APP_ID\",\n"
-        + "  \"appToken\" : \"APP_TOKEN\",\n"
-        + "  \"symphonyToken\" : \"SYMPHONY_TOKEN\",\n"
-        + "  \"expireAt\" : 1539636528288\n"
-        + "}");
+    this.mockApiClient.onPost(LOGIN_PUBKEY_V1_EXTENSION_APP_AUTHENTICATE,"""
+        {
+          "appId" : "APP_ID",
+          "appToken" : "APP_TOKEN",
+          "symphonyToken" : "SYMPHONY_TOKEN",
+          "expireAt" : 1539636528288
+        }\
+        """);
 
     AppAuthSession authSession = this.symphonyBdk.appAuthenticator().authenticateExtensionApp("APP_TOKEN");
 

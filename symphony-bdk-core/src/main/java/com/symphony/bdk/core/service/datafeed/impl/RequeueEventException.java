@@ -12,7 +12,7 @@ import org.apiguardian.api.API;
 @API(status = API.Status.INTERNAL)
 public class RequeueEventException extends RuntimeException {
   public RequeueEventException(V4Event event, RealTimeEventListener listener, EventException e) {
-    super(String.format("Listener %s failed to process event %s with type %s, events will be re-queued",
+    super("Listener %s failed to process event %s with type %s, events will be re-queued".formatted(
         listener, event.getId(), event.getType()), e);
   }
 }

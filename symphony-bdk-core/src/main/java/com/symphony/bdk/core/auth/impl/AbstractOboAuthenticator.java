@@ -5,10 +5,9 @@ import com.symphony.bdk.core.auth.exception.AuthUnauthorizedException;
 import com.symphony.bdk.core.config.model.BdkRetryConfig;
 import com.symphony.bdk.http.api.ApiException;
 
+import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
 import org.apiguardian.api.API;
-
-import javax.annotation.Nonnull;
 
 /**
  * Abstract class to factorize the {@link OboAuthenticator} logic between RSA and certificate,

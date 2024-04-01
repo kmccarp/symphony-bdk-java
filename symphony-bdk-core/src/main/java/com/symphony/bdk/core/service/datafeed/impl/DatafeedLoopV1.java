@@ -74,9 +74,9 @@ public class DatafeedLoopV1 extends AbstractDatafeedLoop {
     this.datafeedRepository = repository;
 
     this.datafeedId = this.retrieveDatafeed().orElse(null);
-    if (this.apiClient instanceof LoadBalancedApiClient) {
+    if (this.apiClient instanceof LoadBalancedApiClient client) {
       this.datafeedRepository.readAgentBasePath()
-          .ifPresent(s -> ((LoadBalancedApiClient) this.apiClient).setBasePath(s));
+          .ifPresent(s -> client.setBasePath(s));
     }
 
     this.readDatafeed = RetryWithRecoveryBuilder.<Void>from(retryWithRecoveryBuilder)

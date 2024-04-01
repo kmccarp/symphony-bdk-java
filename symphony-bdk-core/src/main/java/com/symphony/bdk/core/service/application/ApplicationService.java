@@ -12,11 +12,10 @@ import com.symphony.bdk.gen.api.model.UserAppEntitlement;
 import com.symphony.bdk.gen.api.model.UserAppEntitlementPatch;
 import com.symphony.bdk.http.api.ApiException;
 
+import jakarta.annotation.Nonnull;
 import org.apiguardian.api.API;
 
 import java.util.List;
-
-import javax.annotation.Nonnull;
 
 /**
  * Service class for managing the applications and the application entitlements.

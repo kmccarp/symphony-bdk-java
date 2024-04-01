@@ -1,9 +1,9 @@
 package com.symphony.bdk.core.auth;
 
 import com.symphony.bdk.core.auth.exception.AuthUnauthorizedException;
-import org.apiguardian.api.API;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
+import org.apiguardian.api.API;
 
 /**
  * On-behalf-of authenticator service.

@@ -2,9 +2,8 @@ package com.symphony.bdk.core.auth.exception;
 
 import com.symphony.bdk.http.api.ApiException;
 
+import jakarta.annotation.Nonnull;
 import org.apiguardian.api.API;
-
-import javax.annotation.Nonnull;
 
 /**
  * When thrown, it means that authentication cannot be performed for several reasons depending on the context :

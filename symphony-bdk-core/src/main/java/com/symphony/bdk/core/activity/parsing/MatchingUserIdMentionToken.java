@@ -18,7 +18,7 @@ public class MatchingUserIdMentionToken implements CommandToken {
 
   @Override
   public boolean matches(Object inputToken) {
-    return inputToken instanceof Mention && ((Mention) inputToken).getUserId().equals(matchingUserId.get());
+    return inputToken instanceof Mention m && m.getUserId().equals(matchingUserId.get());
   }
 
   @Override

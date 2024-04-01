@@ -162,11 +162,10 @@ public class ApiClientWebClient implements ApiClient {
           .block();
     } catch (Exception e) {
       Throwable unwrap = Exceptions.unwrap(e);
-      if (unwrap instanceof ApiException) {
-        throw (ApiException) unwrap;
+      if (unwrap instanceof ApiException exception) {
+        throw exception;
       }
-      if (e instanceof WebClientRequestException && e.getCause() instanceof ConnectTimeoutException) {
-        WebClientRequestException exception = (WebClientRequestException) e;
+      if (e instanceof WebClientRequestException exception && e.getCause() instanceof ConnectTimeoutException) {
         throw new WebClientRequestException(new SocketTimeoutException(e.getMessage()), exception.getMethod(),
             exception.getUri(), exception.getHeaders());
       } else {
@@ -231,16 +230,16 @@ public class ApiClientWebClient implements ApiClient {
 
   private void serializeMultiPartDataEntry(String paramKey, Object paramValue,
       MultiValueMap<String, Object> formValueMap) {
-    if (paramValue instanceof File) {
-      addFileToFormParam(paramKey, (File) paramValue, formValueMap);
+    if (paramValue instanceof File file) {
+      addFileToFormParam(paramKey, file, formValueMap);
     } else if (isCollectionOfFiles(paramValue)) {
       ((Collection<?>) paramValue).forEach(f -> addFileToFormParam(paramKey, (File) f, formValueMap));
-    } else if (paramValue instanceof ApiClientBodyPart[]) {
-      for (ApiClientBodyPart bodyPart : (ApiClientBodyPart[]) paramValue) {
+    } else if (paramValue instanceof ApiClientBodyPart[] parts) {
+      for (ApiClientBodyPart bodyPart : parts) {
         serializeApiClientBodyPart(paramKey, bodyPart, formValueMap);
       }
-    } else if (paramValue instanceof ApiClientBodyPart) {
-      serializeApiClientBodyPart(paramKey, (ApiClientBodyPart) paramValue, formValueMap);
+    } else if (paramValue instanceof ApiClientBodyPart part) {
+      serializeApiClientBodyPart(paramKey, part, formValueMap);
     } else {
       formValueMap.add(paramKey, parameterToString(paramValue));
     }
@@ -306,9 +305,9 @@ public class ApiClientWebClient implements ApiClient {
   public String parameterToString(Object param) {
     if (param == null) {
       return "";
-    } else if (param instanceof Collection) {
+    } else if (param instanceof Collection collection) {
       StringBuilder b = new StringBuilder();
-      for (Object o : (Collection<?>) param) {
+      for (Object o : collection) {
         if (b.length() > 0) {
           b.append(',');
         }
@@ -333,8 +332,8 @@ public class ApiClientWebClient implements ApiClient {
     }
 
     Collection<?> valueCollection;
-    if (value instanceof Collection) {
-      valueCollection = (Collection<?>) value;
+    if (value instanceof Collection collection) {
+      valueCollection = collection;
     } else {
       params.add(new Pair(name, parameterToString(value)));
       return params;

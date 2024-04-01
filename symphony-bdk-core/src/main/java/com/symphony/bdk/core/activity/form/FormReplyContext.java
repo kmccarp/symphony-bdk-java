@@ -5,11 +5,10 @@ import com.symphony.bdk.gen.api.model.V4Initiator;
 import com.symphony.bdk.gen.api.model.V4SymphonyElementsAction;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import jakarta.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import org.apiguardian.api.API;
-
-import javax.annotation.Nullable;
 
 /**
  * Default implementation of the {@link ActivityContext} handled by the {@link FormReplyActivity}.

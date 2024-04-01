@@ -10,6 +10,8 @@ import com.symphony.bdk.extension.BdkExtension;
 import com.symphony.bdk.extension.BdkExtensionService;
 import com.symphony.bdk.extension.BdkExtensionServiceProvider;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.apiguardian.api.API;
 
@@ -17,9 +19,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Service class for managing extensions.
@@ -56,28 +55,28 @@ public class ExtensionService {
 
     this.checkAlreadyRegistered(extClz);
 
-    if (extension instanceof BdkAuthenticationAware) {
+    if (extension instanceof BdkAuthenticationAware aware) {
       if (this.botSession == null) {
         log.info("Extension <{}> uses authentication, but it has not been configured in BDK config", extClz);
       } else {
         log.debug("Extension <{}> uses authentication", extClz);
-        ((BdkAuthenticationAware) extension).setAuthSession(this.botSession);
+        aware.setAuthSession(this.botSession);
       }
     }
 
-    if (extension instanceof BdkApiClientFactoryAware) {
+    if (extension instanceof BdkApiClientFactoryAware aware) {
       log.debug("Extension <{}> uses the ApiClientFactory", extClz);
-      ((BdkApiClientFactoryAware) extension).setApiClientFactory(this.apiClientFactory);
+      aware.setApiClientFactory(this.apiClientFactory);
     }
 
-    if (extension instanceof BdkRetryBuilderAware) {
+    if (extension instanceof BdkRetryBuilderAware aware) {
       log.debug("Extension <{}> uses the RetryBuilder", extClz);
-      ((BdkRetryBuilderAware) extension).setRetryBuilder(this.retryBuilder);
+      aware.setRetryBuilder(this.retryBuilder);
     }
 
-    if (extension instanceof BdkConfigAware) {
+    if (extension instanceof BdkConfigAware aware) {
       log.debug("Extension <{}> uses the configuration", extClz);
-      ((BdkConfigAware) extension).setConfiguration(this.config);
+      aware.setConfiguration(this.config);
     }
 
     this.extensions.put(extClz, extension);

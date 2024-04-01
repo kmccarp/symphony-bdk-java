@@ -5,13 +5,12 @@ import com.symphony.bdk.core.service.pagination.model.StreamPaginationAttribute;
 import com.symphony.bdk.gen.api.model.UserSearchQuery;
 import com.symphony.bdk.gen.api.model.UserV2;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apiguardian.api.API;
 
 import java.util.List;
 import java.util.stream.Stream;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Service interface exposing OBO-enabled endpoints to manage users.

@@ -74,9 +74,9 @@ public class ActivityRegistry {
 
     // a command activity (potentially) needs the bot display name and user ID in order to parse the message text content
     // this way of passing this information is not very clean though, we should find something
-    if (activity instanceof CommandActivity) {
-      ((CommandActivity<?>) activity).setBotDisplayName(this.botSession.getDisplayName());
-      ((CommandActivity<?>) activity).setBotUserId(this.botSession.getId());
+    if (activity instanceof CommandActivity commandActivity) {
+      commandActivity.setBotDisplayName(this.botSession.getDisplayName());
+      commandActivity.setBotUserId(this.botSession.getId());
     }
 
     // make the activity to subscribe to its expected real-time event

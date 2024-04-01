@@ -51,8 +51,7 @@ class AuthenticationRetry<T> {
    * @return true if call should be retried.
    */
   public static boolean canAuthenticationBeRetried(Throwable t) {
-    if (t instanceof ApiException) {
-      ApiException apiException = (ApiException) t;
+    if (t instanceof ApiException apiException) {
       return apiException.isServerError() || apiException.isTooManyRequestsError();
     }
     return t.getCause() instanceof SocketTimeoutException || t.getCause() instanceof ConnectException;

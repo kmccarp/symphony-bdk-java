@@ -50,7 +50,7 @@ class DisclaimerServiceTest {
   @Test
   void getDisclaimerById() throws IOException {
     String response = JsonHelper.readFromClasspath("/disclaimer/disclaimer.json");
-    this.mockApiClient.onGet(String.format(V1_DISCLAIMER_BY_ID, "666"), response);
+    this.mockApiClient.onGet(V1_DISCLAIMER_BY_ID.formatted("666"), response);
     Disclaimer disclaimer = this.disclaimerService.getDisclaimer("666");
 
     assertEquals("New Enterprise Disclaimer", disclaimer.getName());
@@ -61,13 +61,13 @@ class DisclaimerServiceTest {
     Exception exception = assertThrows(ApiRuntimeException.class,
         () -> this.disclaimerService.getDisclaimer(null));
     assertTrue(exception.getMessage().contains(
-        String.format(MISSING_REQUIRED_PARAMETER_EXCEPTION_MESSAGE, "did", "v1AdminDisclaimerDidGet")));
+        MISSING_REQUIRED_PARAMETER_EXCEPTION_MESSAGE.formatted("did", "v1AdminDisclaimerDidGet")));
   }
 
   @Test
   void listDisclaimers() throws IOException {
     String response = JsonHelper.readFromClasspath("/disclaimer/list_disclaimers.json");
-    this.mockApiClient.onGet(String.format(V1_LIST_DISCLAIMERS, "666"), response);
+    this.mockApiClient.onGet(V1_LIST_DISCLAIMERS.formatted("666"), response);
     List<Disclaimer> disclaimers = this.disclaimerService.listDisclaimers();
 
     assertEquals(2, disclaimers.size());
@@ -79,7 +79,7 @@ class DisclaimerServiceTest {
   void listDisclaimerUsers() {
     List<Long> response = Arrays.asList(7215545078541L, 3015566078276L);
     String disclaimerId = "777";
-    this.mockApiClient.onGet(String.format(V1_DISCLAIMER_USERS, disclaimerId), response.toString());
+    this.mockApiClient.onGet(V1_DISCLAIMER_USERS.formatted(disclaimerId), response.toString());
     List<Long> disclaimerUsers = this.disclaimerService.listDisclaimerUsers(disclaimerId);
 
     assertEquals(2, disclaimerUsers.size());
@@ -92,6 +92,6 @@ class DisclaimerServiceTest {
         () -> this.disclaimerService.listDisclaimerUsers(null));
 
     assertTrue(exception.getMessage().contains(
-        String.format(MISSING_REQUIRED_PARAMETER_EXCEPTION_MESSAGE, "did", "v1AdminDisclaimerDidUsersGet")));
+        MISSING_REQUIRED_PARAMETER_EXCEPTION_MESSAGE.formatted("did", "v1AdminDisclaimerDidUsersGet")));
   }
 }

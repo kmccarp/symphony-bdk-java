@@ -88,8 +88,10 @@ class ServiceFactory {
 
     if (config.isCommonJwtEnabled()) {
       if (config.isOboConfigured()) {
-        throw new UnsupportedOperationException("Common JWT feature is not available yet in OBO mode,"
-            + " please set commonJwt.enabled to false.");
+        throw new UnsupportedOperationException("""
+            Common JWT feature is not available yet in OBO mode,\
+             please set commonJwt.enabled to false.\
+            """);
       } else {
         final OAuthSession oAuthSession = new OAuthSession(authSession);
         this.podClient.getAuthentications().put(BEARER_AUTH, new OAuthentication(oAuthSession::getBearerToken));

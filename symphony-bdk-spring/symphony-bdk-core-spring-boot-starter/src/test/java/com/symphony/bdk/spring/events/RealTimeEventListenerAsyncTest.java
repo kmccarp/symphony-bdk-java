@@ -14,7 +14,6 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,12 +25,10 @@ import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.util.ErrorHandler;
 
 @SpringBootTest(classes = RealTimeEventsAsyncTestListener.class)
 @ContextConfiguration(classes = RealTimeEventListenerAsyncTest.TestContextConfig.class)
-@ExtendWith(SpringExtension.class)
 public class RealTimeEventListenerAsyncTest {
   @Autowired
   private ApplicationEventPublisher publisher;

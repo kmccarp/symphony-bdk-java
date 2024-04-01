@@ -154,15 +154,17 @@ public class ApplicationManagementServiceTest {
   @Test
   void updateAppEntitlementsTest() {
     mockApiClient.onPost(V1_UPDATE_APP_ENTITLEMENTS,
-        "[\n"
-            + "    {\n"
-            + "        \"appId\": \"rsa-app-auth-example\",\n"
-            + "        \"appName\": \"App Auth RSA Example\",\n"
-            + "        \"enable\": true,\n"
-            + "        \"listed\": true,\n"
-            + "        \"install\": false\n"
-            + "    }\n"
-            + "]");
+        """
+        [
+            {
+                "appId": "rsa-app-auth-example",
+                "appName": "App Auth RSA Example",
+                "enable": true,
+                "listed": true,
+                "install": false
+            }
+        ]\
+        """);
     PodAppEntitlement entitlement = new PodAppEntitlement()
         .appId("rsa-app-auth-example")
         .appName("App Auth RSA Example")

@@ -76,7 +76,7 @@ class Resilience4jRetryWithRecoveryTest {
 
     Resilience4jRetryWithRecovery<String> r = new Resilience4jRetryWithRecovery<>("name", "localhost.symphony.com",
         ofMinimalInterval(), supplier,
-        (t) -> t instanceof ApiException && ((ApiException) t).isClientError(),
+        (t) -> t instanceof ApiException ae && ae.isClientError(),
         Collections.emptyList());
 
     assertEquals(value, r.execute());
@@ -118,7 +118,7 @@ class Resilience4jRetryWithRecoveryTest {
 
     Resilience4jRetryWithRecovery<String> r = new Resilience4jRetryWithRecovery<>("name", "localhost.symphony.com",
         ofMinimalInterval(), supplier,
-        (t) -> t instanceof ApiException && ((ApiException) t).isServerError(),
+        (t) -> t instanceof ApiException ae && ae.isServerError(),
         Collections.emptyList());
 
     assertThrows(ApiException.class, r::execute);
@@ -256,9 +256,11 @@ class Resilience4jRetryWithRecoveryTest {
           new RetryWithRecoveryBuilder<String>().retryConfig(ofMinimalInterval(3)), "test",
           "localhost.symphony.com", supplier);
     } catch (RuntimeException e){
-      assertEquals("Network error occurred while trying to connect to the \"POD\" at the following address: "
-          + "localhost.symphony.com. Your host is unknown, please check that the address is correct. Also consider "
-          + "checking your proxy/firewall connections.", e.getMessage());
+      assertEquals("""
+          Network error occurred while trying to connect to the "POD" at the following address: \
+          localhost.symphony.com. Your host is unknown, please check that the address is correct. Also consider \
+          checking your proxy/firewall connections.\
+          """, e.getMessage());
     }
  }
 
@@ -272,9 +274,11 @@ class Resilience4jRetryWithRecoveryTest {
           new RetryWithRecoveryBuilder<String>().retryConfig(ofMinimalInterval(3)), "test",
           "localhost.symphony.com", supplier);
     } catch (RuntimeException e){
-      assertEquals("Timeout occurred while trying to connect to the \"POD\" at the following address: "
-          + "localhost.symphony.com. Please check that the address is correct. Also consider checking your "
-          + "proxy/firewall connections.", e.getMessage());
+      assertEquals("""
+          Timeout occurred while trying to connect to the "POD" at the following address: \
+          localhost.symphony.com. Please check that the address is correct. Also consider checking your \
+          proxy/firewall connections.\
+          """, e.getMessage());
     }
   }
 
@@ -288,8 +292,10 @@ class Resilience4jRetryWithRecoveryTest {
           new RetryWithRecoveryBuilder<String>().retryConfig(ofMinimalInterval(3)), "test",
           "localhost.symphony.com", supplier);
     } catch (RuntimeException e){
-      assertEquals("An unknown error occurred while trying to connect to localhost.symphony.com. "
-          + "Please check below for more information: ", e.getMessage());
+      assertEquals("""
+          An unknown error occurred while trying to connect to localhost.symphony.com. \
+          Please check below for more information: \
+          """, e.getMessage());
     }
   }
 
@@ -303,9 +309,11 @@ class Resilience4jRetryWithRecoveryTest {
           new RetryWithRecoveryBuilder<String>().retryConfig(ofMinimalInterval(3)), "test", "localhost.symphony.com",
           supplier);
     } catch (RuntimeException e){
-      assertEquals("Connection refused while trying to connect to the \"POD\" at the following address: "
-          + "localhost.symphony.com. Please check if this remote address/port is reachable. Also consider checking your "
-          + "proxy/firewall connections.", e.getMessage());
+      assertEquals("""
+          Connection refused while trying to connect to the "POD" at the following address: \
+          localhost.symphony.com. Please check if this remote address/port is reachable. Also consider checking your \
+          proxy/firewall connections.\
+          """, e.getMessage());
     }
   }
 

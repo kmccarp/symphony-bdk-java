@@ -40,6 +40,8 @@ import com.symphony.bdk.http.api.util.ApiUtils;
 import com.symphony.bdk.http.api.util.TypeReference;
 import com.symphony.bdk.template.api.TemplateEngine;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.apiguardian.api.API;
 
@@ -48,9 +50,6 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Service class for managing messages.
@@ -325,8 +324,8 @@ public class MessageService implements OboMessageService, OboService<OboMessageS
   @API(status = API.Status.EXPERIMENTAL)
   public V4Message update(@Nonnull String streamId, @Nonnull String messageId, @Nonnull Message content) {
     return this.executeAndRetry("update", messagesApi.getApiClient().getBasePath(), () ->  {
-      final String path = String.format(
-          "/v4/stream/%s/message/%s/update",
+      final String path = 
+          "/v4/stream/%s/message/%s/update".formatted(
           this.messagesApi.getApiClient().escapeString(toUrlSafeIdIfNeeded(streamId)),
           this.messagesApi.getApiClient().escapeString(toUrlSafeIdIfNeeded(messageId))
       );

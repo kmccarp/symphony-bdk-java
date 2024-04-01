@@ -8,12 +8,11 @@ import com.symphony.bdk.gen.api.DisclaimerApi;
 import com.symphony.bdk.gen.api.model.Disclaimer;
 import com.symphony.bdk.http.api.ApiException;
 
+import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
 import org.apiguardian.api.API;
 
 import java.util.List;
-
-import javax.annotation.Nonnull;
 
 /**
  * Service class for managing disclaimers.

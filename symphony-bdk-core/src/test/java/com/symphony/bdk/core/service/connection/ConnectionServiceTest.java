@@ -59,13 +59,15 @@ public class ConnectionServiceTest {
   @Test
   void testAcceptConnectionOboMode() {
     this.mockApiClient.onPost(V1_ACCEPT_CONNECTION,
-        "{\n"
-            + "  \"userId\": 7078106169577,\n"
-            + "  \"status\": \"ACCEPTED\",\n"
-            + "  \"firstRequestedAt\": 1471046357339,\n"
-            + "  \"updatedAt\": 1471046517684,\n"
-            + "  \"requestCounter\": 1\n"
-            + "}");
+        """
+        {
+          "userId": 7078106169577,
+          "status": "ACCEPTED",
+          "firstRequestedAt": 1471046357339,
+          "updatedAt": 1471046517684,
+          "requestCounter": 1
+        }\
+        """);
 
 
     this.service = new ConnectionService(this.spiedConnectionApi, new RetryWithRecoveryBuilder<>());
@@ -77,10 +79,12 @@ public class ConnectionServiceTest {
   @Test
   void getConnectionTest() {
     this.mockApiClient.onGet(V1_GET_CONNECTION.replace("{userId}", "769658112378"),
-        "{\n"
-            + "  \"userId\": 769658112378,\n"
-            + "  \"status\": \"ACCEPTED\"\n"
-            + "}");
+        """
+        {
+          "userId": 769658112378,
+          "status": "ACCEPTED"
+        }\
+        """);
 
     UserConnection userConnection = this.service.getConnection(769658112378L);
 
@@ -102,18 +106,20 @@ public class ConnectionServiceTest {
               pair("status", "ALL"),
               pair("userIds", "7078106126503,7078106103809")
           ),
-        "[\n"
-            + "  {\n"
-            + "    \"userId\": 7078106126503,\n"
-            + "    \"status\": \"PENDING_OUTGOING\",\n"
-            + "    \"updatedAt\": 1471018076255\n"
-            + "  },\n"
-            + "  {\n"
-            + "    \"userId\": 7078106103809,\n"
-            + "    \"status\": \"PENDING_INCOMING\",\n"
-            + "    \"updatedAt\": 1467562406219\n"
-            + "  }\n"
-            + "]");
+        """
+        [
+          {
+            "userId": 7078106126503,
+            "status": "PENDING_OUTGOING",
+            "updatedAt": 1471018076255
+          },
+          {
+            "userId": 7078106103809,
+            "status": "PENDING_INCOMING",
+            "updatedAt": 1467562406219
+          }
+        ]\
+        """);
 
     List<UserConnection> connections = this.service.listConnections(ConnectionStatus.ALL, asList(7078106126503L, 7078106103809L));
 
@@ -128,18 +134,20 @@ public class ConnectionServiceTest {
   void listConnectionsWithNullStatusTest() {
     this.mockApiClient.onGet(V1_LIST_CONNECTION,
         Collections.singletonList(pair("userIds", "7078106126503,7078106103809")),
-        "[\n"
-            + "  {\n"
-            + "    \"userId\": 7078106126503,\n"
-            + "    \"status\": \"PENDING_OUTGOING\",\n"
-            + "    \"updatedAt\": 1471018076255\n"
-            + "  },\n"
-            + "  {\n"
-            + "    \"userId\": 7078106103809,\n"
-            + "    \"status\": \"PENDING_INCOMING\",\n"
-            + "    \"updatedAt\": 1467562406219\n"
-            + "  }\n"
-            + "]");
+        """
+        [
+          {
+            "userId": 7078106126503,
+            "status": "PENDING_OUTGOING",
+            "updatedAt": 1471018076255
+          },
+          {
+            "userId": 7078106103809,
+            "status": "PENDING_INCOMING",
+            "updatedAt": 1467562406219
+          }
+        ]\
+        """);
 
     List<UserConnection> connections = this.service.listConnections(null, asList(7078106126503L, 7078106103809L));
 
@@ -154,18 +162,20 @@ public class ConnectionServiceTest {
   void listConnectionsWithNullListOfUsersTest() {
     this.mockApiClient.onGet(V1_LIST_CONNECTION,
         Collections.singletonList(pair("status", "PENDING_OUTGOING")),
-        "[\n"
-            + "  {\n"
-            + "    \"userId\": 7078106126503,\n"
-            + "    \"status\": \"PENDING_OUTGOING\",\n"
-            + "    \"updatedAt\": 1471018076255\n"
-            + "  },\n"
-            + "  {\n"
-            + "    \"userId\": 7078106103809,\n"
-            + "    \"status\": \"PENDING_INCOMING\",\n"
-            + "    \"updatedAt\": 1467562406219\n"
-            + "  }\n"
-            + "]");
+        """
+        [
+          {
+            "userId": 7078106126503,
+            "status": "PENDING_OUTGOING",
+            "updatedAt": 1471018076255
+          },
+          {
+            "userId": 7078106103809,
+            "status": "PENDING_INCOMING",
+            "updatedAt": 1467562406219
+          }
+        ]\
+        """);
 
     List<UserConnection> connections = this.service.listConnections(ConnectionStatus.PENDING_OUTGOING, null);
 
@@ -186,13 +196,15 @@ public class ConnectionServiceTest {
   @Test
   void createConnectionTest() {
     this.mockApiClient.onPost(V1_CREATE_CONNECTION,
-        "{\n"
-            + "  \"userId\": 7078106126503,\n"
-            + "  \"status\": \"PENDING_OUTGOING\",\n"
-            + "  \"firstRequestedAt\": 1471018076255,\n"
-            + "  \"updatedAt\": 1471018076255,\n"
-            + "  \"requestCounter\": 1\n"
-            + "}");
+        """
+        {
+          "userId": 7078106126503,
+          "status": "PENDING_OUTGOING",
+          "firstRequestedAt": 1471018076255,
+          "updatedAt": 1471018076255,
+          "requestCounter": 1
+        }\
+        """);
 
     UserConnection connection = this.service.createConnection(7078106126503L);
 
@@ -211,13 +223,15 @@ public class ConnectionServiceTest {
   @Test
   void acceptConnectionTest() {
     this.mockApiClient.onPost(V1_ACCEPT_CONNECTION,
-        "{\n"
-            + "  \"userId\": 7078106169577,\n"
-            + "  \"status\": \"ACCEPTED\",\n"
-            + "  \"firstRequestedAt\": 1471046357339,\n"
-            + "  \"updatedAt\": 1471046517684,\n"
-            + "  \"requestCounter\": 1\n"
-            + "}");
+        """
+        {
+          "userId": 7078106169577,
+          "status": "ACCEPTED",
+          "firstRequestedAt": 1471046357339,
+          "updatedAt": 1471046517684,
+          "requestCounter": 1
+        }\
+        """);
 
     UserConnection connection = this.service.acceptConnection(7078106169577L);
 
@@ -236,13 +250,15 @@ public class ConnectionServiceTest {
   @Test
   void rejectConnectionTest() {
     this.mockApiClient.onPost(V1_REJECT_CONNECTION,
-        "{\n"
-            + "  \"userId\": 7215545059385,\n"
-            + "  \"status\": \"REJECTED\",\n"
-            + "  \"firstRequestedAt\": 1471044955409,\n"
-            + "  \"updatedAt\": 1471045390420,\n"
-            + "  \"requestCounter\": 1\n"
-            + "}");
+        """
+        {
+          "userId": 7215545059385,
+          "status": "REJECTED",
+          "firstRequestedAt": 1471044955409,
+          "updatedAt": 1471045390420,
+          "requestCounter": 1
+        }\
+        """);
 
     UserConnection connection = this.service.rejectConnection(7215545059385L);
 

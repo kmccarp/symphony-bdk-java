@@ -16,6 +16,7 @@ import com.symphony.bdk.core.client.ApiClientFactory;
 import com.symphony.bdk.core.config.model.BdkAuthenticationConfig;
 import com.symphony.bdk.core.config.model.BdkConfig;
 
+import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apiguardian.api.API;
@@ -26,8 +27,6 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.PrivateKey;
-
-import javax.annotation.Nonnull;
 
 /**
  * Factory class that provides new instances for the main authenticators :
@@ -198,8 +197,10 @@ public class AuthenticatorFactory {
       }
       return JwtHelper.parseRsaPrivateKey(privateKey);
     } catch (GeneralSecurityException e) {
-      final String message = String.format("Unable to parse RSA Private Key from path %s. Check if the format is "
-          + "correct.", privateKeyPath);
+      final String message = ("""
+          Unable to parse RSA Private Key from path %s. Check if the format is \
+          correct.\
+          """).formatted(privateKeyPath);
       throw new AuthInitializationException(message, e);
     } catch (IOException e) {
       final String message = "Unable to read or find RSA Private Key from path " + privateKeyPath;
@@ -212,8 +213,10 @@ public class AuthenticatorFactory {
 
     // useful for testing when private key is located into resources
     if (privateKeyPath.startsWith("classpath:")) {
-      log.warn("Warning: Keeping RSA private keys into project resources is dangerous. "
-          + "You should consider another location for production.");
+      log.warn("""
+          Warning: Keeping RSA private keys into project resources is dangerous. \
+          You should consider another location for production.\
+          """);
       is = AuthenticatorFactory.class.getResourceAsStream(privateKeyPath.replace("classpath:", ""));
       if (is == null) {
         throw new AuthInitializationException(

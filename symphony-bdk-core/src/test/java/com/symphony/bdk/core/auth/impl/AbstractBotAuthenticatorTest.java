@@ -10,11 +10,12 @@ import com.symphony.bdk.http.api.ApiClient;
 import com.symphony.bdk.http.api.ApiException;
 import com.symphony.bdk.http.api.ApiResponse;
 import com.symphony.bdk.http.api.ApiRuntimeException;
+
+import jakarta.annotation.Nonnull;
 import jakarta.ws.rs.ProcessingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.annotation.Nonnull;
 import java.net.SocketTimeoutException;
 import java.util.Collections;
 

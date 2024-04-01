@@ -323,16 +323,18 @@ class UserServiceTest {
 
   @Test
   void getAvatarFromUser() {
-    this.mockApiClient.onGet(GET_AVATAR_FROM_USER.replace("{uid}", "1234"), "[\n"
-        + "  {\n"
-        + "    \"size\": \"600\",\n"
-        + "    \"url\": \"../avatars/acme/600/7215545057281/3gXMhglCCTwLPL9JAprnyHzYn5-PR49-wYDG814n1g8.png\"\n"
-        + "  },\n"
-        + "  {\n"
-        + "    \"size\": \"150\",\n"
-        + "    \"url\": \"../avatars/acme/150/7215545057281/3gXMhglCCTwLPL9JAprnyHzYn5-PR49-wYDG814n1g8.png\"\n"
-        + "  }\n"
-        + "]");
+    this.mockApiClient.onGet(GET_AVATAR_FROM_USER.replace("{uid}", "1234"), """
+        [
+          {
+            "size": "600",
+            "url": "../avatars/acme/600/7215545057281/3gXMhglCCTwLPL9JAprnyHzYn5-PR49-wYDG814n1g8.png"
+          },
+          {
+            "size": "150",
+            "url": "../avatars/acme/150/7215545057281/3gXMhglCCTwLPL9JAprnyHzYn5-PR49-wYDG814n1g8.png"
+          }
+        ]\
+        """);
 
     List<Avatar> avatars = this.service.getAvatar(1234L);
 
@@ -381,16 +383,18 @@ class UserServiceTest {
 
   @Test
   void getDisclaimerAssignedToUserTest() {
-    this.mockApiClient.onGet(GET_DISCLAIMER_OF_USER.replace("{uid}", "1234"), "{\n"
-        + "  \"id\": \"571d2052e4b042aaf06d2e7a\",\n"
-        + "  \"name\": \"Enterprise Disclaimer\",\n"
-        + "  \"content\": \"This is a disclaimer for the enterprise.\",\n"
-        + "  \"frequencyInHours\": 24,\n"
-        + "  \"isDefault\": false,\n"
-        + "  \"isActive\": true,\n"
-        + "  \"createdDate\": 1461526610846,\n"
-        + "  \"modifiedDate\": 1461526610846\n"
-        + "}");
+    this.mockApiClient.onGet(GET_DISCLAIMER_OF_USER.replace("{uid}", "1234"), """
+        {
+          "id": "571d2052e4b042aaf06d2e7a",
+          "name": "Enterprise Disclaimer",
+          "content": "This is a disclaimer for the enterprise.",
+          "frequencyInHours": 24,
+          "isDefault": false,
+          "isActive": true,
+          "createdDate": 1461526610846,
+          "modifiedDate": 1461526610846
+        }\
+        """);
 
     Disclaimer disclaimer = this.service.getDisclaimer(1234L);
     assertEquals(disclaimer.getName(), "Enterprise Disclaimer");
@@ -476,24 +480,26 @@ class UserServiceTest {
 
   @Test
   void getFeatureEntitlementsOfUserTest() {
-    this.mockApiClient.onGet(GET_FEATURE_ENTITLEMENTS_OF_USER.replace("{uid}", "1234"), "[\n"
-        + "  {\n"
-        + "    \"entitlment\": \"canCreatePublicRoom\",\n"
-        + "    \"enabled\": true\n"
-        + "  },\n"
-        + "  {\n"
-        + "    \"entitlment\": \"isExternalRoomEnabled\",\n"
-        + "    \"enabled\": false\n"
-        + "  },\n"
-        + "  {\n"
-        + "    \"entitlment\": \"delegatesEnabled\",\n"
-        + "    \"enabled\": true\n"
-        + "  },\n"
-        + "  {\n"
-        + "    \"entitlment\": \"isExternalIMEnabled\",\n"
-        + "    \"enabled\": true\n"
-        + "  }\n"
-        + "]");
+    this.mockApiClient.onGet(GET_FEATURE_ENTITLEMENTS_OF_USER.replace("{uid}", "1234"), """
+        [
+          {
+            "entitlment": "canCreatePublicRoom",
+            "enabled": true
+          },
+          {
+            "entitlment": "isExternalRoomEnabled",
+            "enabled": false
+          },
+          {
+            "entitlment": "delegatesEnabled",
+            "enabled": true
+          },
+          {
+            "entitlment": "isExternalIMEnabled",
+            "enabled": true
+          }
+        ]\
+        """);
 
     List<Feature> features = this.service.getFeatureEntitlements(1234L);
 
@@ -755,20 +761,22 @@ class UserServiceTest {
   @Test
   void listUserFollowersTest() {
     this.mockApiClient.onGet(V1_LIST_FOLLOWERS.replace("{uid}", "1234"),
-        "{\n"
-            + "    \"count\": 3,\n"
-            + "    \"followers\": [\n"
-            + "        13056700579848,\n"
-            + "        13056700580889,\n"
-            + "        13056700580890\n"
-            + "    ],\n"
-            + "    \"pagination\": {\n"
-            + "        \"cursors\": {\n"
-            + "            \"before\": \"1\",\n"
-            + "            \"after\": \"4\"\n"
-            + "        }\n"
-            + "    }\n"
-            + "}");
+        """
+        {
+            "count": 3,
+            "followers": [
+                13056700579848,
+                13056700580889,
+                13056700580890
+            ],
+            "pagination": {
+                "cursors": {
+                    "before": "1",
+                    "after": "4"
+                }
+            }
+        }\
+        """);
 
     FollowersListResponse response = this.service.listUserFollowers(1234L);
 
@@ -781,20 +789,22 @@ class UserServiceTest {
   @Test
   void listUserFollowersPaginationTest() {
     this.mockApiClient.onGet(V1_LIST_FOLLOWERS.replace("{uid}", "1234"),
-        "{\n"
-            + "    \"count\": 3,\n"
-            + "    \"followers\": [\n"
-            + "        13056700579848,\n"
-            + "        13056700580889,\n"
-            + "        13056700580890\n"
-            + "    ],\n"
-            + "    \"pagination\": {\n"
-            + "        \"cursors\": {\n"
-            + "            \"before\": \"1\",\n"
-            + "            \"after\": \"4\"\n"
-            + "        }\n"
-            + "    }\n"
-            + "}");
+        """
+        {
+            "count": 3,
+            "followers": [
+                13056700579848,
+                13056700580889,
+                13056700580890
+            ],
+            "pagination": {
+                "cursors": {
+                    "before": "1",
+                    "after": "4"
+                }
+            }
+        }\
+        """);
 
     FollowersListResponse response = this.service.listUserFollowers(1234L, new CursorPaginationAttribute(4, 1, 5));
 
@@ -806,19 +816,21 @@ class UserServiceTest {
 
   @Test
   void listAllUserFollowersTest() {
-    this.mockApiClient.onGet(V1_LIST_FOLLOWERS.replace("{uid}", "1234"), "{\n"
-        + "    \"count\": 3,\n"
-        + "    \"followers\": [\n"
-        + "        13056700579848,\n"
-        + "        13056700580889,\n"
-        + "        13056700580890\n"
-        + "    ],\n"
-        + "    \"pagination\": {\n"
-        + "        \"cursors\": {\n"
-        + "            \"before\": \"1\"\n"
-        + "        }\n"
-        + "    }\n"
-        + "}");
+    this.mockApiClient.onGet(V1_LIST_FOLLOWERS.replace("{uid}", "1234"), """
+        {
+            "count": 3,
+            "followers": [
+                13056700579848,
+                13056700580889,
+                13056700580890
+            ],
+            "pagination": {
+                "cursors": {
+                    "before": "1"
+                }
+            }
+        }\
+        """);
 
     List<Long> followers = this.service.listAllUserFollowers(1234L).collect(Collectors.toList());
 
@@ -830,14 +842,16 @@ class UserServiceTest {
 
   @Test
   void listAllUserFollowersNoPaginationTest() {
-    this.mockApiClient.onGet(V1_LIST_FOLLOWERS.replace("{uid}", "1234"), "{\n"
-        + "    \"count\": 3,\n"
-        + "    \"followers\": [\n"
-        + "        13056700579848,\n"
-        + "        13056700580889,\n"
-        + "        13056700580890\n"
-        + "    ]\n"
-        + "}");
+    this.mockApiClient.onGet(V1_LIST_FOLLOWERS.replace("{uid}", "1234"), """
+        {
+            "count": 3,
+            "followers": [
+                13056700579848,
+                13056700580889,
+                13056700580890
+            ]
+        }\
+        """);
 
     List<Long> followers = this.service.listAllUserFollowers(1234L).collect(Collectors.toList());
 
@@ -849,19 +863,21 @@ class UserServiceTest {
 
   @Test
   void listAllUserFollowersPaginationTest() {
-    this.mockApiClient.onGet(V1_LIST_FOLLOWERS.replace("{uid}", "1234"), "{\n"
-        + "    \"count\": 3,\n"
-        + "    \"followers\": [\n"
-        + "        13056700579848,\n"
-        + "        13056700580889,\n"
-        + "        13056700580890\n"
-        + "    ],\n"
-        + "    \"pagination\": {\n"
-        + "        \"cursors\": {\n"
-        + "            \"before\": \"1\"\n"
-        + "        }\n"
-        + "    }\n"
-        + "}");
+    this.mockApiClient.onGet(V1_LIST_FOLLOWERS.replace("{uid}", "1234"), """
+        {
+            "count": 3,
+            "followers": [
+                13056700579848,
+                13056700580889,
+                13056700580890
+            ],
+            "pagination": {
+                "cursors": {
+                    "before": "1"
+                }
+            }
+        }\
+        """);
 
     List<Long> followers = this.service.listAllUserFollowers(1234L, new StreamPaginationAttribute(10, 10)).collect(Collectors.toList());
 
@@ -874,18 +890,20 @@ class UserServiceTest {
   @Test
   void listUserFollowingTest() {
     this.mockApiClient.onGet(V1_LIST_FOLLOWING.replace("{uid}", "1234"),
-        "{\n"
-            + "    \"count\": 2,\n"
-            + "    \"following\": [\n"
-            + "        13056700580888,\n"
-            + "        13056700580889\n"
-            + "    ],\n"
-            + "    \"pagination\": {\n"
-            + "        \"cursors\": {\n"
-            + "            \"before\": \"1\"\n"
-            + "        }\n"
-            + "    }\n"
-            + "}");
+        """
+        {
+            "count": 2,
+            "following": [
+                13056700580888,
+                13056700580889
+            ],
+            "pagination": {
+                "cursors": {
+                    "before": "1"
+                }
+            }
+        }\
+        """);
 
     FollowingListResponse response = this.service.listUsersFollowing(1234L);
 
@@ -897,18 +915,20 @@ class UserServiceTest {
   @Test
   void listUserFollowingPaginationTest() {
     this.mockApiClient.onGet(V1_LIST_FOLLOWING.replace("{uid}", "1234"),
-        "{\n"
-            + "    \"count\": 2,\n"
-            + "    \"following\": [\n"
-            + "        13056700580888,\n"
-            + "        13056700580889\n"
-            + "    ],\n"
-            + "    \"pagination\": {\n"
-            + "        \"cursors\": {\n"
-            + "            \"before\": \"1\"\n"
-            + "        }\n"
-            + "    }\n"
-            + "}");
+        """
+        {
+            "count": 2,
+            "following": [
+                13056700580888,
+                13056700580889
+            ],
+            "pagination": {
+                "cursors": {
+                    "before": "1"
+                }
+            }
+        }\
+        """);
 
     FollowingListResponse response = this.service.listUsersFollowing(1234L, new CursorPaginationAttribute(4, 1, 5));
 
@@ -920,18 +940,20 @@ class UserServiceTest {
   @Test
   void listAllUserFollowingTest() {
     this.mockApiClient.onGet(V1_LIST_FOLLOWING.replace("{uid}", "1234"),
-        "{\n"
-            + "    \"count\": 2,\n"
-            + "    \"following\": [\n"
-            + "        13056700580888,\n"
-            + "        13056700580889\n"
-            + "    ],\n"
-            + "    \"pagination\": {\n"
-            + "        \"cursors\": {\n"
-            + "            \"before\": \"1\"\n"
-            + "        }\n"
-            + "    }\n"
-            + "}");
+        """
+        {
+            "count": 2,
+            "following": [
+                13056700580888,
+                13056700580889
+            ],
+            "pagination": {
+                "cursors": {
+                    "before": "1"
+                }
+            }
+        }\
+        """);
 
     List<Long> followers = this.service.listAllUserFollowing(1234L).collect(Collectors.toList());
 
@@ -943,18 +965,20 @@ class UserServiceTest {
   @Test
   void listAllUserFollowingsPaginationTest() {
     this.mockApiClient.onGet(V1_LIST_FOLLOWING.replace("{uid}", "1234"),
-        "{\n"
-            + "    \"count\": 2,\n"
-            + "    \"following\": [\n"
-            + "        13056700580888,\n"
-            + "        13056700580889\n"
-            + "    ],\n"
-            + "    \"pagination\": {\n"
-            + "        \"cursors\": {\n"
-            + "            \"before\": \"1\"\n"
-            + "        }\n"
-            + "    }\n"
-            + "}");
+        """
+        {
+            "count": 2,
+            "following": [
+                13056700580888,
+                13056700580889
+            ],
+            "pagination": {
+                "cursors": {
+                    "before": "1"
+                }
+            }
+        }\
+        """);
 
     List<Long> followers = this.service.listAllUserFollowing(1234L, new StreamPaginationAttribute(10, 10)).collect(Collectors.toList());
 
@@ -966,13 +990,15 @@ class UserServiceTest {
   @Test
   void listAllUserFollowingsPaginationNoPaginationTest() {
     this.mockApiClient.onGet(V1_LIST_FOLLOWING.replace("{uid}", "1234"),
-        "{\n"
-            + "    \"count\": 2,\n"
-            + "    \"following\": [\n"
-            + "        13056700580888,\n"
-            + "        13056700580889\n"
-            + "    ]\n"
-            + "}");
+        """
+        {
+            "count": 2,
+            "following": [
+                13056700580888,
+                13056700580889
+            ]
+        }\
+        """);
 
     List<Long> followers = this.service.listAllUserFollowing(1234L, new StreamPaginationAttribute(10, 10)).collect(Collectors.toList());
 
@@ -1009,7 +1035,7 @@ class UserServiceTest {
   void createUserMissingPayload() {
     Exception exception = assertThrows(ApiRuntimeException.class, () -> this.service.create(null));
     assertTrue(exception.getMessage().contains(
-        String.format(MISSING_REQUIRED_PARAMETER_EXCEPTION_MESSAGE, "payload", "v2AdminUserCreatePost")));
+        MISSING_REQUIRED_PARAMETER_EXCEPTION_MESSAGE.formatted("payload", "v2AdminUserCreatePost")));
   }
 
   @Test
@@ -1030,7 +1056,7 @@ class UserServiceTest {
     Exception exception = assertThrows(ApiRuntimeException.class, () -> this.service.update(123L, null));
 
     assertTrue(exception.getMessage().contains(
-        String.format(MISSING_REQUIRED_PARAMETER_EXCEPTION_MESSAGE, "payload", "v2AdminUserUidUpdatePost")));
+        MISSING_REQUIRED_PARAMETER_EXCEPTION_MESSAGE.formatted("payload", "v2AdminUserUidUpdatePost")));
   }
 
   @Test
@@ -1039,7 +1065,7 @@ class UserServiceTest {
     Exception exception = assertThrows(ApiRuntimeException.class, () -> this.service.update(null, new V2UserAttributes()));
 
     assertTrue(exception.getMessage().contains(
-        String.format(MISSING_REQUIRED_PARAMETER_EXCEPTION_MESSAGE, "uid", "v2AdminUserUidUpdatePost")));
+        MISSING_REQUIRED_PARAMETER_EXCEPTION_MESSAGE.formatted("uid", "v2AdminUserUidUpdatePost")));
   }
 
   @Test
@@ -1097,7 +1123,7 @@ class UserServiceTest {
         new CursorPaginationAttribute(1,3,2),1353716993L, "SUPER_ADMINISTRATOR"));
 
     assertTrue(exception.getMessage().contains(
-        String.format(MISSING_REQUIRED_PARAMETER_EXCEPTION_MESSAGE, "startTimestamp", "v1AudittrailPrivilegeduserGet")));
+        MISSING_REQUIRED_PARAMETER_EXCEPTION_MESSAGE.formatted("startTimestamp", "v1AudittrailPrivilegeduserGet")));
   }
 
   @Test

@@ -10,10 +10,9 @@ import com.symphony.bdk.gen.api.model.Token;
 import com.symphony.bdk.http.api.ApiClient;
 import com.symphony.bdk.http.api.ApiException;
 
+import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
 import org.apiguardian.api.API;
-
-import javax.annotation.Nonnull;
 
 /**
  * Abstract class to factorize the {@link BotAuthenticator} logic between RSA and certificate,
@@ -42,8 +41,10 @@ public abstract class AbstractBotAuthenticator implements BotAuthenticator {
   protected abstract String retrieveKeyManagerToken() throws AuthUnauthorizedException;
 
   protected String retrieveKeyManagerToken(ApiClient client) throws AuthUnauthorizedException {
-    final String unauthorizedMessage = String.format("Service account \"%s\" is not authorized to authenticate. "
-        + "Check if credentials are valid.", getBotUsername());
+    final String unauthorizedMessage = ("""
+        Service account "%s" is not authorized to authenticate. \
+        Check if credentials are valid.\
+        """).formatted(getBotUsername());
 
     return kmAuthenticationRetry.executeAndRetry("AbstractBotAuthenticator.retrieveKeyManagerToken",
         client.getBasePath(), () -> doRetrieveToken(client).getToken(), unauthorizedMessage);
@@ -52,8 +53,10 @@ public abstract class AbstractBotAuthenticator implements BotAuthenticator {
   protected abstract Token retrieveSessionToken() throws AuthUnauthorizedException;
 
   protected Token retrieveSessionToken(ApiClient client) throws AuthUnauthorizedException {
-    final String unauthorizedMessage = String.format("Service account \"%s\" is not authorized to authenticate. "
-        + "Check if credentials are valid.", getBotUsername());
+    final String unauthorizedMessage = ("""
+        Service account "%s" is not authorized to authenticate. \
+        Check if credentials are valid.\
+        """).formatted(getBotUsername());
 
     return podAuthenticationRetry.executeAndRetry("AbstractBotAuthenticator.retrieveSessionToken",
         client.getBasePath(), () -> this.doRetrieveToken(client), unauthorizedMessage);
@@ -71,8 +74,10 @@ public abstract class AbstractBotAuthenticator implements BotAuthenticator {
 
   private JwtToken doRetrieveAuthorizationToken(ApiClient client, String sessionToken)
       throws AuthUnauthorizedException {
-    final String unauthorizedMessage = String.format("Service account \"%s\" is not authorized to authenticate. "
-        + "Check if credentials are valid.", getBotUsername());
+    final String unauthorizedMessage = ("""
+        Service account "%s" is not authorized to authenticate. \
+        Check if credentials are valid.\
+        """).formatted(getBotUsername());
 
     // we are not using any scopes for now when calling pod APIs
     return idmAuthenticationRetry.executeAndRetry("AbstractBotAuthenticator.retrieveAuthorizationToken",

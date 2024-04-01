@@ -37,14 +37,13 @@ import com.symphony.bdk.gen.api.model.V3RoomDetail;
 import com.symphony.bdk.gen.api.model.V3RoomSearchResults;
 import com.symphony.bdk.http.api.ApiException;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.apiguardian.api.API;
 
 import java.util.Arrays;
 import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Service class for managing streams.

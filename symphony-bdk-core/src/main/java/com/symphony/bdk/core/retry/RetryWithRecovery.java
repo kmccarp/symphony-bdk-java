@@ -122,28 +122,38 @@ public abstract class RetryWithRecovery<T> {
    * @return error message
    */
   public static String networkIssueMessageError(Throwable t, String address) {
-    String messageError = String.format("An unknown error occurred while trying to connect to %s. Please check below "
-        + "for more information: ", address);
+    String messageError = ("""
+        An unknown error occurred while trying to connect to %s. Please check below \
+        for more information: \
+        """).formatted(address);
     String service = ApiClientFactory.getServiceNameFromBasePath(address).toString();
     if (t.getCause() instanceof SSLHandshakeException) {
-      messageError = String.format(
-          "Network error occurred while trying to connect to the \"%s\" at the following address: %s. "
-              + "Error while trying to validate certificate for the trust store. This type of error typically means "
-              + "that your network is using a self-signed certificate.", service, address);
+      messageError = (
+          """
+          Network error occurred while trying to connect to the "%s" at the following address: %s. \
+          Error while trying to validate certificate for the trust store. This type of error typically means \
+          that your network is using a self-signed certificate.\
+          """).formatted(service, address);
     } else if (t.getCause() instanceof UnknownHostException) {
-      messageError = String.format(
-          "Network error occurred while trying to connect to the \"%s\" at the following address: %s. Your host is unknown, "
-              + "please check that the address is correct. Also consider checking your proxy/firewall connections.",
+      messageError = (
+          """
+          Network error occurred while trying to connect to the "%s" at the following address: %s. Your host is unknown, \
+          please check that the address is correct. Also consider checking your proxy/firewall connections.\
+          """).formatted(
           service, address);
     } else if (t.getCause() instanceof SocketTimeoutException) {
-      messageError = String.format(
-          "Timeout occurred while trying to connect to the \"%s\" at the following address: %s. "
-              + "Please check that the address is correct. Also consider checking your proxy/firewall connections.",
+      messageError = (
+          """
+          Timeout occurred while trying to connect to the "%s" at the following address: %s. \
+          Please check that the address is correct. Also consider checking your proxy/firewall connections.\
+          """).formatted(
           service, address);
     } else if (t.getCause() instanceof ConnectException) {
-      messageError = String.format(
-          "Connection refused while trying to connect to the \"%s\" at the following address: %s. "
-              + "Please check if this remote address/port is reachable. Also consider checking your proxy/firewall connections.",
+      messageError = (
+          """
+          Connection refused while trying to connect to the "%s" at the following address: %s. \
+          Please check if this remote address/port is reachable. Also consider checking your proxy/firewall connections.\
+          """).formatted(
           service, address);
     }
     return messageError;

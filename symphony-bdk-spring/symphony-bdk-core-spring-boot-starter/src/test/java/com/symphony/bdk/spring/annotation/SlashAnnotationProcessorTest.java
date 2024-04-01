@@ -19,10 +19,8 @@ import com.symphony.bdk.spring.slash.TestFormReplyActivity;
 import com.symphony.bdk.spring.slash.TestSlashCommand;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -38,7 +36,6 @@ import java.util.stream.Collectors;
  * registered withing the {@link com.symphony.bdk.core.activity.ActivityRegistry}.
  */
 @SpringBootTest
-@ExtendWith(SpringExtension.class)
 public class SlashAnnotationProcessorTest {
 
   @Autowired

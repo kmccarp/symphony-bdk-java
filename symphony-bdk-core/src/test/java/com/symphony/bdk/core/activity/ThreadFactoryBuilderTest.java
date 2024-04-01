@@ -18,14 +18,14 @@ class ThreadFactoryBuilderTest {
   void builderPriorityTooBig() {
     assertThatThrownBy(() -> new ThreadFactoryBuilder().setPriority(Thread.MAX_PRIORITY + 1))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage(String.format("Thread priority %s must be <= %s", Thread.MAX_PRIORITY + 1, Thread.MAX_PRIORITY));
+        .hasMessage("Thread priority %s must be <= %s".formatted(Thread.MAX_PRIORITY + 1, Thread.MAX_PRIORITY));
   }
 
   @Test
   void builderPriorityTooSmall() {
     assertThatThrownBy(() -> new ThreadFactoryBuilder().setPriority(Thread.MIN_PRIORITY - 1))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage(String.format("Thread priority %s must be >= %s", Thread.MIN_PRIORITY - 1, Thread.MIN_PRIORITY));
+        .hasMessage("Thread priority %s must be >= %s".formatted(Thread.MIN_PRIORITY - 1, Thread.MIN_PRIORITY));
   }
 
   @Test

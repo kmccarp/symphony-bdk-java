@@ -5,9 +5,8 @@ import com.symphony.bdk.core.auth.ExtensionAppAuthenticator;
 import com.symphony.bdk.core.auth.exception.AuthUnauthorizedException;
 import com.symphony.bdk.gen.api.model.ExtensionAppTokens;
 
+import jakarta.annotation.Nullable;
 import org.apiguardian.api.API;
-
-import javax.annotation.Nullable;
 
 /**
  * {@link AppAuthSession} impl for rsa extension app authentication mode.

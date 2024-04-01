@@ -9,6 +9,9 @@ dependencies {
     api project(':symphony-bdk-spring:symphony-bdk-core-spring-boot-starter')
     api project(':symphony-bdk-test:symphony-bdk-test-jupiter')
     implementation 'org.apiguardian:apiguardian-api'
+    implementation "org.mockito:mockito-junit-jupiter:4.11.0"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.10.2"
+    testImplementation "org.mockito:mockito-junit-jupiter:3.12.4"
     implementation project(':symphony-bdk-template:symphony-bdk-template-freemarker')
 
     api 'org.springframework.boot:spring-boot-starter'
@@ -21,4 +24,7 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         exclude group: 'junit', module: 'junit'
     }
+}
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 }

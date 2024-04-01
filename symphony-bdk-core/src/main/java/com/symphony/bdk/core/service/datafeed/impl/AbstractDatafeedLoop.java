@@ -15,6 +15,7 @@ import com.symphony.bdk.gen.api.model.V4Event;
 import com.symphony.bdk.http.api.ApiException;
 import com.symphony.bdk.http.api.tracing.DistributedTracingContext;
 
+import jakarta.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.apiguardian.api.API;
 
@@ -23,8 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import javax.annotation.Nullable;
 
 /**
  * Base class for implementing the datafeed services. A datafeed services can help a bot subscribe or unsubscribe
@@ -128,7 +127,7 @@ abstract class AbstractDatafeedLoop implements DatafeedLoop {
 
       final Optional<RealTimeEventType> eventType = RealTimeEventType.fromV4Event(event);
 
-      if (!eventType.isPresent()) {
+      if (eventType.isEmpty()) {
         log.info("Unsupported event received: {}", event);
         continue;
       }

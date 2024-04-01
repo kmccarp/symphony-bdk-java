@@ -23,12 +23,12 @@ class ThreadFactoryBuilder {
   public ThreadFactoryBuilder setPriority(int priority) {
     if (priority > Thread.MAX_PRIORITY) {
       throw new IllegalArgumentException(
-          String.format("Thread priority %s must be <= %s", priority, Thread.MAX_PRIORITY));
+          "Thread priority %s must be <= %s".formatted(priority, Thread.MAX_PRIORITY));
     }
 
     if (priority < Thread.MIN_PRIORITY) {
       throw new IllegalArgumentException(
-          String.format("Thread priority %s must be >= %s", priority, Thread.MIN_PRIORITY));
+          "Thread priority %s must be >= %s".formatted(priority, Thread.MIN_PRIORITY));
     }
 
     this.priority = priority;

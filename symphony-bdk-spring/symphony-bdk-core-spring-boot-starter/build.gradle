@@ -44,8 +44,13 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok'
 
     testImplementation project(':symphony-bdk-core').sourceSets.test.output
+    testImplementation "org.junit.jupiter:junit-jupiter:5.10.2"
+    testImplementation "org.mockito:mockito-junit-jupiter:3.12.4"
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+}
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 }
 

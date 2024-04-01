@@ -47,11 +47,15 @@ public interface TemplateEngine {
         .collect(Collectors.toList());
 
     if (templateEngines.isEmpty()) {
-      throw new IllegalStateException("No TemplateEngine implementation found in classpath. "
-          + "Please add a symphony-bdk-template-* (freemarker or handlebars) dependency to your project.");
+      throw new IllegalStateException("""
+          No TemplateEngine implementation found in classpath. \
+          Please add a symphony-bdk-template-* (freemarker or handlebars) dependency to your project.\
+          """);
     } else if (templateEngines.size() > 1) {
-      throw new IllegalStateException("More than 1 TemplateEngine implementation found in classpath. "
-          + "Please remove the extra symphony-bdk-template-* dependency from your project");
+      throw new IllegalStateException("""
+          More than 1 TemplateEngine implementation found in classpath. \
+          Please remove the extra symphony-bdk-template-* dependency from your project\
+          """);
     }
     return templateEngines.stream().findFirst().get();
   }

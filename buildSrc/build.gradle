@@ -11,3 +11,6 @@ dependencies {
     implementation 'de.undercouch:gradle-download-task:5.0.2'
     implementation 'com.github.ben-manes:gradle-versions-plugin:0.42.0'
 }
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}

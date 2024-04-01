@@ -7,13 +7,12 @@ import com.symphony.bdk.gen.api.model.ChannelSubscriber;
 import com.symphony.bdk.gen.api.model.ChannelSubscriptionResponse;
 import com.symphony.bdk.gen.api.model.Signal;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apiguardian.api.API;
 
 import java.util.List;
 import java.util.stream.Stream;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Service interface exposing OBO-enabled endpoints to manage signals information.

@@ -16,6 +16,6 @@ public class MessageContains implements ArgumentMatcher<Message> {
 
   @Override
   public String toString() {
-    return String.format("message does not contain '%s'.", message);
+    return "message does not contain '%s'.".formatted(message);
   }
 }

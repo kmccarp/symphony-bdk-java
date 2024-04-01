@@ -10,3 +10,6 @@ dependencies {
     api 'org.apiguardian:apiguardian-api'
 
 }
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}

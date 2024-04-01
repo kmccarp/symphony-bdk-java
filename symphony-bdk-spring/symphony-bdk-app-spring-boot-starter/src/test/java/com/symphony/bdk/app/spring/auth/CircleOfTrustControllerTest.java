@@ -94,10 +94,12 @@ public class CircleOfTrustControllerTest {
     mockMvc.perform(
         post("/bdk/v1/app/tokens")
             .contentType(MediaType.APPLICATION_JSON)
-            .content("{"
-                + "    \"appToken\": \"test-token\","
-                + "    \"symphonyToken\": \"test-symphony-token\""
-                + "}"))
+            .content("""
+                {\
+                    "appToken": "test-token",\
+                    "symphonyToken": "test-symphony-token"\
+                }\
+                """))
         .andExpect(status().isNoContent());
   }
 
@@ -108,10 +110,12 @@ public class CircleOfTrustControllerTest {
     MockHttpServletResponse response = mockMvc.perform(
         post("/bdk/v1/app/tokens")
             .contentType(MediaType.APPLICATION_JSON)
-            .content("{\n"
-                + "    \"appToken\": \"test-token\",\n"
-                + "    \"symphonyToken\": \"test-wrong-token\"\n"
-                + "}"))
+            .content("""
+                {
+                    "appToken": "test-token",
+                    "symphonyToken": "test-wrong-token"
+                }\
+                """))
         .andExpect(status().isUnauthorized())
         .andReturn().getResponse();
 

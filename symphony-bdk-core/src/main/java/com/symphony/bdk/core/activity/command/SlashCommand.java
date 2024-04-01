@@ -9,13 +9,12 @@ import com.symphony.bdk.core.activity.parsing.SlashCommandPattern;
 import com.symphony.bdk.gen.api.model.V4Initiator;
 import com.symphony.bdk.gen.api.model.V4MessageSent;
 
+import jakarta.annotation.Nonnull;
 import lombok.Getter;
 import org.apiguardian.api.API;
 
 import java.util.Objects;
 import java.util.function.Consumer;
-
-import javax.annotation.Nonnull;
 
 /**
  * A "slash" command if the most basic action that can be performed by an end-user through the chat.

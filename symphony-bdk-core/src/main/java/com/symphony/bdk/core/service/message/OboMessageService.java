@@ -6,12 +6,10 @@ import com.symphony.bdk.gen.api.model.V4Message;
 import com.symphony.bdk.gen.api.model.V4Stream;
 import com.symphony.bdk.template.api.TemplateEngine;
 
-
+import jakarta.annotation.Nonnull;
 import org.apiguardian.api.API;
 
 import java.util.List;
-
-import javax.annotation.Nonnull;
 
 /**
  * Service interface exposing OBO-enabled endpoints to manage messages.

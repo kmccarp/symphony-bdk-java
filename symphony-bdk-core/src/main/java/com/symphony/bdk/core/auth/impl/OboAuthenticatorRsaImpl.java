@@ -9,12 +9,11 @@ import com.symphony.bdk.gen.api.model.AuthenticateRequest;
 import com.symphony.bdk.http.api.ApiClient;
 import com.symphony.bdk.http.api.ApiException;
 
+import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
 import org.apiguardian.api.API;
 
 import java.security.PrivateKey;
-
-import javax.annotation.Nonnull;
 
 /**
  * OBO authenticator RSA implementation.

@@ -8,10 +8,11 @@ import com.symphony.bdk.gen.api.model.ExtensionAppTokens;
 import com.symphony.bdk.gen.api.model.PodCertificate;
 import com.symphony.bdk.http.api.ApiException;
 import com.symphony.bdk.http.api.ApiRuntimeException;
+
+import jakarta.annotation.Nonnull;
 import jakarta.ws.rs.ProcessingException;
 import org.junit.jupiter.api.Test;
 
-import javax.annotation.Nonnull;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
