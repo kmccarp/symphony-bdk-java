@@ -69,7 +69,7 @@ class DatafeedLoadBalancedApiClientTest {
     final String accept = "accept";
     final String contentType = "content type";
     final String[] authNames = {"authNames"};
-    final TypeReference<String> returnType = new TypeReference<String>() {};
+    final TypeReference<String> returnType = new TypeReference<>() {};
 
     loadBalancedApiClient.invokeAPI(path, method, queryParams, body, headerParams, cookieParams, formParams, accept,
         contentType, authNames, returnType);

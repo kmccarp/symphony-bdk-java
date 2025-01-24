@@ -88,8 +88,6 @@ abstract class AbstractDatafeedLoop implements DatafeedLoop {
     try {
       updateLastPullTimestamp();
       runLoop();
-    } catch (AuthUnauthorizedException | ApiException | NestedRetryException exception) {
-      throw exception;
     } catch (Throwable throwable) {
       log.error("{}\n{}", networkIssueMessageError(throwable, datafeedApi.getApiClient().getBasePath()), throwable);
     } finally {

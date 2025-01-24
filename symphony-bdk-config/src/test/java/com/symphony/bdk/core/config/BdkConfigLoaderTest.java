@@ -28,10 +28,10 @@ import java.util.UUID;
 
 class BdkConfigLoaderTest {
 
-  private final static String YAML_CONFIG_PATH = "/config/config.yaml";
-  private final static String JSON_CONFIG_PATH = "/config/config.json";
-  private final static String JSON_CONFIG_GLOBAL_PATH = "/config/config_client_global.yaml";
-  private final static String BOT_USERNAME = "tibot";
+  private static final String YAML_CONFIG_PATH = "/config/config.yaml";
+  private static final String JSON_CONFIG_PATH = "/config/config.json";
+  private static final String JSON_CONFIG_GLOBAL_PATH = "/config/config_client_global.yaml";
+  private static final String BOT_USERNAME = "tibot";
 
   @Test
   void loadFromYamlInputStreamTest() throws BdkConfigException {

@@ -37,8 +37,12 @@ public class RealTimeEvent<T> extends ApplicationEvent implements ResolvableType
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     RealTimeEvent<?> that = (RealTimeEvent<?>) o;
     return initiator.equals(that.initiator) &&
         source.equals(that.source);

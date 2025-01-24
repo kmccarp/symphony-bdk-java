@@ -52,7 +52,7 @@ public abstract class RetryWithRecovery<T> {
       final SupplierWithApiException<T> supplier
   ) {
 
-    final RetryWithRecovery<T> retry = RetryWithRecoveryBuilder.<T>from(baseRetryBuilder)
+    final RetryWithRecovery<T> retry = RetryWithRecoveryBuilder.from(baseRetryBuilder)
         .name(name)
         .supplier(supplier)
         .basePath(address)

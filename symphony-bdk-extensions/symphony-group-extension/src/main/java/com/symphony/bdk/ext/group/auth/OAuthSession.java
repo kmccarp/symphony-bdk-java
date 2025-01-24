@@ -37,7 +37,7 @@ public class OAuthSession {
     this.loginClient = loginClient;
     this.session = session;
     this.retryBuilder = RetryWithRecoveryBuilder.copyWithoutRecoveryStrategies(retryBuilder)
-        .recoveryStrategy(ApiException::isUnauthorized, session::refresh);;
+        .recoveryStrategy(ApiException::isUnauthorized, session::refresh);
   }
 
   /**

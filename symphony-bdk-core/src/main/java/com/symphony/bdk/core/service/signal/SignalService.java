@@ -190,7 +190,7 @@ public class SignalService implements OboSignalService, OboService<OboSignalServ
   public Stream<ChannelSubscriber> listAllSubscribers(@Nonnull String id,
       @Nonnull StreamPaginationAttribute pagination) {
     OffsetBasedPaginatedApi<ChannelSubscriber> api =
-        (((offset, limit) -> listSubscribers(id, new PaginationAttribute(offset, limit))));
+        (offset, limit) -> listSubscribers(id, new PaginationAttribute(offset, limit));
     return new OffsetBasedPaginatedService<>(api, pagination.getChunkSize(), pagination.getTotalSize()).stream();
   }
 
@@ -201,7 +201,7 @@ public class SignalService implements OboSignalService, OboService<OboSignalServ
   @API(status = API.Status.EXPERIMENTAL)
   public Stream<ChannelSubscriber> listAllSubscribers(@Nonnull String id) {
     OffsetBasedPaginatedApi<ChannelSubscriber> api =
-        (((offset, limit) -> listSubscribers(id, new PaginationAttribute(offset, limit))));
+        (offset, limit) -> listSubscribers(id, new PaginationAttribute(offset, limit));
     return new OffsetBasedPaginatedService<>(api, PaginatedService.DEFAULT_PAGINATION_CHUNK_SIZE,
         PaginatedService.DEFAULT_PAGINATION_TOTAL_SIZE).stream();
   }

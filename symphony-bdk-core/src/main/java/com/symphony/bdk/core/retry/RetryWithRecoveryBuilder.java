@@ -182,7 +182,7 @@ public class RetryWithRecoveryBuilder<T> {
    * @return the modified builder instance.
    */
   public RetryWithRecoveryBuilder<T> ignoreException(Predicate<ApiException> ignoreException) {
-    this.ignoreException = (e) -> e instanceof ApiException && ignoreException.test((ApiException) e);
+    this.ignoreException = e -> e instanceof ApiException && ignoreException.test((ApiException) e);
     return this;
   }
 

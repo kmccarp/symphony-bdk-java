@@ -76,7 +76,7 @@ class AuthenticationRetry<T> {
    */
   public T executeAndRetry(String name, String address, SupplierWithApiException<T> supplier, String unauthorizedErrorMessage)
       throws AuthUnauthorizedException {
-    final RetryWithRecovery<T> retry = RetryWithRecoveryBuilder.<T>from(baseRetryBuilder)
+    final RetryWithRecovery<T> retry = RetryWithRecoveryBuilder.from(baseRetryBuilder)
         .name(name)
         .basePath(address)
         .supplier(supplier).build();

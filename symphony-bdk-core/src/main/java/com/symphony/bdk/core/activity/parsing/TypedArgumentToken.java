@@ -7,7 +7,7 @@ import org.apiguardian.api.API;
  * @param <T> the type to be matched. In practice, this is {@link Mention}, {@link Cashtag} or {@link Hashtag}.
  */
 @API(status = API.Status.INTERNAL)
-public class TypedArgumentToken<T> implements ArgumentCommandToken {
+public final class TypedArgumentToken<T> implements ArgumentCommandToken {
 
   private final Class<T> type;
   private final String argumentName;

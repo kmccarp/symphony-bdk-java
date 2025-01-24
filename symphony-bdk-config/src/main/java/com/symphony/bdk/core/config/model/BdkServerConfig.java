@@ -35,10 +35,10 @@ public class BdkServerConfig {
     if (localContext == null) {
       return "";
     }
-    if (!localContext.equals("") && localContext.charAt(0) != '/') {
+    if (!"".equals(localContext) && localContext.charAt(0) != '/') {
       return "/" + localContext;
     }
-    if (!localContext.equals("") && localContext.endsWith("/")) {
+    if (!"".equals(localContext) && localContext.endsWith("/")) {
       return localContext.substring(0, localContext.length() - 1);
     }
 

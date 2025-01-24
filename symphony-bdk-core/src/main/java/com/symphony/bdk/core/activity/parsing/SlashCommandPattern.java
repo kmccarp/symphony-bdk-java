@@ -74,7 +74,7 @@ public class SlashCommandPattern {
    */
   public Map<String, ? extends Class<?>> getArgumentDefinitions() {
     return tokens.stream()
-        .filter(t -> t instanceof ArgumentCommandToken)
+        .filter(ArgumentCommandToken.class::isInstance)
         .collect(Collectors.toMap(t -> ((ArgumentCommandToken) t).getArgumentName(), t -> t.getTokenType()));
   }
 
@@ -155,7 +155,7 @@ public class SlashCommandPattern {
 
   private void checkArgumentNamesUniqueness(List<CommandToken> tokens) {
     final List<String> argumentNames = tokens.stream()
-        .filter(t -> t instanceof ArgumentCommandToken)
+        .filter(ArgumentCommandToken.class::isInstance)
         .map(t -> ((ArgumentCommandToken) t).getArgumentName())
         .collect(Collectors.toList());
 

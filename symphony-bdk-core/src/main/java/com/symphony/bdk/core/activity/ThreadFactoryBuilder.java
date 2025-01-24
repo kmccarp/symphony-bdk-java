@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @API(status = API.Status.INTERNAL)
 class ThreadFactoryBuilder {
-  private String name = null;
+  private String name;
   private int priority = Thread.NORM_PRIORITY;
 
   public ThreadFactoryBuilder setName(String name) {

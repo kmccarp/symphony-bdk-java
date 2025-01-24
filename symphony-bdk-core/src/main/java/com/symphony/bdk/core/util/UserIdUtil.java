@@ -11,7 +11,7 @@ import org.apiguardian.api.API;
  * This leaves 36 lowest bits for the user ID, which allows 68.7 billion users per tenant.
  */
 @API(status = API.Status.STABLE)
-public class UserIdUtil {
+public final class UserIdUtil {
 
   private static final int TENANT_ID_BIT_LENGTH = 27;
   private static final int SUBTENANT_ID_BIT_LENGTH = 36;

@@ -11,7 +11,7 @@ import java.util.Map;
 
 public abstract class TestApiClient implements ApiClient {
 
-  private Map<String, Authentication> authentications = new HashMap<>();
+  private final Map<String, Authentication> authentications = new HashMap<>();
 
   @Override
   public List<Pair> parameterToPairs(String collectionFormat, String name, Object value) {

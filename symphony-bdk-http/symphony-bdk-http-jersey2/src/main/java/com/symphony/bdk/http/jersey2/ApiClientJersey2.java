@@ -153,7 +153,7 @@ public class ApiClientJersey2 implements ApiClient {
     }
 
     Entity<?> entity =
-        (body == null && formParams == null) ? Entity.json("") : this.serialize(body, formParams, contentType);
+        body == null && formParams == null ? Entity.json("") : this.serialize(body, formParams, contentType);
 
     try (Response response = getResponse(invocationBuilder, method, entity)) {
 
@@ -178,7 +178,7 @@ public class ApiClientJersey2 implements ApiClient {
         String respBody = null;
         if (response.hasEntity()) {
           try {
-            respBody = String.valueOf(response.readEntity(String.class));
+            respBody = response.readEntity(String.class);
             message = respBody;
           } catch (RuntimeException e) {
             // ignored if we cannot read the response body
@@ -285,7 +285,7 @@ public class ApiClientJersey2 implements ApiClient {
     }
 
     // get the collection format (default: csv)
-    String format = (collectionFormat == null || collectionFormat.isEmpty() ? "csv" : collectionFormat);
+    String format = collectionFormat == null || collectionFormat.isEmpty() ? "csv" : collectionFormat;
 
     // create the params based on the collection format
     if ("multi".equals(format)) {
@@ -398,7 +398,7 @@ public class ApiClientJersey2 implements ApiClient {
    */
   protected boolean isJsonMime(String mime) {
     String jsonMime = "(?i)^(application/json|[^;/ \t]+/[^;/ \t]+[+]json)[ \t]*(;.*)?$";
-    return mime != null && (mime.matches(jsonMime) || mime.equals("*/*"));
+    return mime != null && (mime.matches(jsonMime) || "*/*".equals(mime));
   }
 
   /**

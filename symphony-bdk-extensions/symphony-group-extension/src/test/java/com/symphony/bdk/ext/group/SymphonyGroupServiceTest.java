@@ -115,10 +115,9 @@ class SymphonyGroupServiceTest {
     final ReadGroup readGroup = groupService.updateGroup(ifMatch, groupId, new UpdateGroup());
 
     assertEquals(groupToReturn, readGroup);
-    final Map<String, String> expectedHeaders = new HashMap<String, String>() {{
-      put("If-Match", ifMatch);
-      put("X-Symphony-Host", "");
-    }};
+    final Map<String, String> expectedHeaders = new HashMap<>();
+    expectedHeaders.put("If-Match", ifMatch);
+    expectedHeaders.put("X-Symphony-Host", "");
     verifyClientCalledWithHeaders(profileManagerClient, "PUT", "/v1/groups/" + groupId, expectedHeaders);
   }
 

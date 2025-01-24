@@ -53,9 +53,8 @@ public class SymphonyBdkAppAutoConfigurationTest {
         .withUserConfiguration(SymphonyBdkMockedConfiguration.class)
         .withConfiguration(AutoConfigurations.of(SymphonyBdkAppAutoConfiguration.class));
 
-    contextRunner.run(context -> {
-      assertThat(context).doesNotHaveBean(CircleOfTrustController.class);
-    });
+    contextRunner.run(context ->
+      assertThat(context).doesNotHaveBean(CircleOfTrustController.class));
   }
 
   @Test

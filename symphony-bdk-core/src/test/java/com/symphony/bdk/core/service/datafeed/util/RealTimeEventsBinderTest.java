@@ -55,7 +55,7 @@ class RealTimeEventsBinderTest {
   @Test
   void testBindOnUserJoinedRoom() {
     final AtomicBoolean methodCalled = new AtomicBoolean(false);
-    final BiConsumer<V4Initiator, V4UserJoinedRoom> methodToBind = ((initiator, v4UserJoinedRoom) -> methodCalled.set(true));
+    final BiConsumer<V4Initiator, V4UserJoinedRoom> methodToBind = (initiator, v4UserJoinedRoom) -> methodCalled.set(true);
     RealTimeEventsBinder.bindOnUserJoinedRoom(this.realTimeEventsProvider::setListener, methodToBind);
     this.realTimeEventsProvider.trigger(l -> l.onUserJoinedRoom(new V4Initiator(), new V4UserJoinedRoom()));
     assertTrue(methodCalled.get());

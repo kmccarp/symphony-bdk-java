@@ -43,7 +43,7 @@ public class RealTimeEventListenerAsyncTest {
 
   private V4Initiator initiator;
 
-  static boolean hasException = false;
+  static boolean hasException;
 
   @BeforeEach
   public void setUp() {

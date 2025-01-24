@@ -117,7 +117,7 @@ class AbstractExtensionAppAuthenticatorTest {
         spy(new TestExtAppAuthenticator(ofMinimalInterval(2)));
     doThrow(new ApiException(503, "")).when(authenticator).callGetPodCertificate();
 
-    assertThrows(ApiRuntimeException.class, () -> authenticator.getPodCertificate());
+    assertThrows(ApiRuntimeException.class, authenticator::getPodCertificate);
     verify(authenticator, times(2)).callGetPodCertificate();
   }
 

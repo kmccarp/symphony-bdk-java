@@ -345,7 +345,7 @@ public class ApiClientWebClient implements ApiClient {
     }
 
     // get the collection format (default: csv)
-    String format = (collectionFormat == null || collectionFormat.isEmpty() ? "csv" : collectionFormat);
+    String format = collectionFormat == null || collectionFormat.isEmpty() ? "csv" : collectionFormat;
 
     // create the params based on the collection format
     if ("multi".equals(format)) {
@@ -402,7 +402,7 @@ public class ApiClientWebClient implements ApiClient {
 
   protected boolean isJsonMime(String mime) {
     String jsonMime = "(?i)^(application/json|[^;/ \t]+/[^;/ \t]+[+]json)[ \t]*(;.*)?$";
-    return mime != null && (mime.matches(jsonMime) || mime.equals("*/*"));
+    return mime != null && (mime.matches(jsonMime) || "*/*".equals(mime));
   }
 
   /**

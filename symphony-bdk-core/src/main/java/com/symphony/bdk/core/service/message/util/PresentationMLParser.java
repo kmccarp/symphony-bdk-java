@@ -20,7 +20,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
  * Helper class for parsing the PresentationML to text content.
  */
 @API(status = API.Status.STABLE)
-public class PresentationMLParser {
+public final class PresentationMLParser {
 
   private static final ThreadLocal<DocumentBuilder> LOCAL_BUILDER = ThreadLocal.withInitial(
       PresentationMLParser::initBuilder);

@@ -29,61 +29,44 @@ import static net.bytebuddy.matcher.ElementMatchers.isPublic;
 @Slf4j
 enum RealTimeEventType {
 
-  MESSAGESENT((listener, event) -> {
-    listener.onMessageSent(event.getInitiator(), proxy(event.getPayload().getMessageSent(), event));
-  }),
-  MESSAGESUPPRESSED((listener, event) -> {
-    listener.onMessageSuppressed(event.getInitiator(), proxy(event.getPayload().getMessageSuppressed(), event));
-  }),
-  SYMPHONYELEMENTSACTION((listener, event) -> {
+  MESSAGESENT((listener, event) ->
+    listener.onMessageSent(event.getInitiator(), proxy(event.getPayload().getMessageSent(), event))),
+  MESSAGESUPPRESSED((listener, event) ->
+    listener.onMessageSuppressed(event.getInitiator(), proxy(event.getPayload().getMessageSuppressed(), event))),
+  SYMPHONYELEMENTSACTION((listener, event) ->
     listener.onSymphonyElementsAction(event.getInitiator(),
-        proxy(event.getPayload().getSymphonyElementsAction(), event));
-  }),
-  SHAREDPOST((listener, event) -> {
-    listener.onSharedPost(event.getInitiator(), proxy(event.getPayload().getSharedPost(), event));
-  }),
-  INSTANTMESSAGECREATED((listener, event) -> {
-    listener.onInstantMessageCreated(event.getInitiator(), proxy(event.getPayload().getInstantMessageCreated(), event));
-  }),
-  ROOMCREATED((listener, event) -> {
-    listener.onRoomCreated(event.getInitiator(), proxy(event.getPayload().getRoomCreated(), event));
-  }),
-  ROOMUPDATED((listener, event) -> {
-    listener.onRoomUpdated(event.getInitiator(), proxy(event.getPayload().getRoomUpdated(), event));
-  }),
-  ROOMDEACTIVATED((listener, event) -> {
-    listener.onRoomDeactivated(event.getInitiator(), proxy(event.getPayload().getRoomDeactivated(), event));
-  }),
-  ROOMREACTIVATED((listener, event) -> {
-    listener.onRoomReactivated(event.getInitiator(), proxy(event.getPayload().getRoomReactivated(), event));
-  }),
-  USERJOINEDROOM((listener, event) -> {
-    listener.onUserJoinedRoom(event.getInitiator(), proxy(event.getPayload().getUserJoinedRoom(), event));
-  }),
-  USERLEFTROOM((listener, event) -> {
-    listener.onUserLeftRoom(event.getInitiator(), proxy(event.getPayload().getUserLeftRoom(), event));
-  }),
-  USERREQUESTEDTOJOINROOM((listener, event) -> {
+        proxy(event.getPayload().getSymphonyElementsAction(), event))),
+  SHAREDPOST((listener, event) ->
+    listener.onSharedPost(event.getInitiator(), proxy(event.getPayload().getSharedPost(), event))),
+  INSTANTMESSAGECREATED((listener, event) ->
+    listener.onInstantMessageCreated(event.getInitiator(), proxy(event.getPayload().getInstantMessageCreated(), event))),
+  ROOMCREATED((listener, event) ->
+    listener.onRoomCreated(event.getInitiator(), proxy(event.getPayload().getRoomCreated(), event))),
+  ROOMUPDATED((listener, event) ->
+    listener.onRoomUpdated(event.getInitiator(), proxy(event.getPayload().getRoomUpdated(), event))),
+  ROOMDEACTIVATED((listener, event) ->
+    listener.onRoomDeactivated(event.getInitiator(), proxy(event.getPayload().getRoomDeactivated(), event))),
+  ROOMREACTIVATED((listener, event) ->
+    listener.onRoomReactivated(event.getInitiator(), proxy(event.getPayload().getRoomReactivated(), event))),
+  USERJOINEDROOM((listener, event) ->
+    listener.onUserJoinedRoom(event.getInitiator(), proxy(event.getPayload().getUserJoinedRoom(), event))),
+  USERLEFTROOM((listener, event) ->
+    listener.onUserLeftRoom(event.getInitiator(), proxy(event.getPayload().getUserLeftRoom(), event))),
+  USERREQUESTEDTOJOINROOM((listener, event) ->
     listener.onUserRequestedToJoinRoom(event.getInitiator(),
-        proxy(event.getPayload().getUserRequestedToJoinRoom(), event));
-  }),
-  ROOMMEMBERPROMOTEDTOOWNER((listener, event) -> {
+        proxy(event.getPayload().getUserRequestedToJoinRoom(), event))),
+  ROOMMEMBERPROMOTEDTOOWNER((listener, event) ->
     listener.onRoomMemberPromotedToOwner(event.getInitiator(),
-        proxy(event.getPayload().getRoomMemberPromotedToOwner(), event));
-  }),
-  ROOMMEMBERDEMOTEDFROMOWNER((listener, event) -> {
+        proxy(event.getPayload().getRoomMemberPromotedToOwner(), event))),
+  ROOMMEMBERDEMOTEDFROMOWNER((listener, event) ->
     listener.onRoomMemberDemotedFromOwner(event.getInitiator(),
-        proxy(event.getPayload().getRoomMemberDemotedFromOwner(), event));
-  }),
-  CONNECTIONACCEPTED((listener, event) -> {
-    listener.onConnectionAccepted(event.getInitiator(), proxy(event.getPayload().getConnectionAccepted(), event));
-  }),
-  CONNECTIONREQUESTED((listener, event) -> {
-    listener.onConnectionRequested(event.getInitiator(), proxy(event.getPayload().getConnectionRequested(), event));
-  }),
-  GENERICSYSTEMEVENT((listener, event) -> {
-    listener.onGenericSystemEvent(event.getInitiator(), proxy(event.getPayload().getGenericSystemEvent(), event));
-  });
+        proxy(event.getPayload().getRoomMemberDemotedFromOwner(), event))),
+  CONNECTIONACCEPTED((listener, event) ->
+    listener.onConnectionAccepted(event.getInitiator(), proxy(event.getPayload().getConnectionAccepted(), event))),
+  CONNECTIONREQUESTED((listener, event) ->
+    listener.onConnectionRequested(event.getInitiator(), proxy(event.getPayload().getConnectionRequested(), event))),
+  GENERICSYSTEMEVENT((listener, event) ->
+    listener.onGenericSystemEvent(event.getInitiator(), proxy(event.getPayload().getGenericSystemEvent(), event)));
 
 
   private final BiConsumer<RealTimeEventListener, V4Event> execConsumer;

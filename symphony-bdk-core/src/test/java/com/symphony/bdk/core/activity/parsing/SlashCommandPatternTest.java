@@ -156,10 +156,9 @@ class SlashCommandPatternTest {
     assertIsStringArgumentToken(tokens.get(1));
     assertIsStringArgumentToken(tokens.get(2));
 
-    Map<String, Class<?>> expectedArgumentDefs = new HashMap<String, Class<?>>() {{
-      put(firstArgName, String.class);
-      put(secondArgName, String.class);
-    }};
+    Map<String, Class<?>> expectedArgumentDefs = new HashMap<>();
+    expectedArgumentDefs.put(firstArgName, String.class);
+    expectedArgumentDefs.put(secondArgName, String.class);
     assertEquals(expectedArgumentDefs, pattern.getArgumentDefinitions());
 
     final MatchResult matchResultEmptyInput = getMatchResult(pattern,"/command");
@@ -258,10 +257,9 @@ class SlashCommandPatternTest {
     V4Message message = buildMessage("/command <span class=\"entity\" data-entity-id=\"0\">@John Doe</span> argValue",
         "{\"0\":{\"id\":[{\"type\":\"com.symphony.user.userId\",\"value\":\"12345678\"}],\"type\":\"com.symphony.user.mention\"}}");
 
-    Map<String, Class<?>> expectedArgumentDefs = new HashMap<String, Class<?>>() {{
-      put(mentionArgName, Mention.class);
-      put(stringArgName, String.class);
-    }};
+    Map<String, Class<?>> expectedArgumentDefs = new HashMap<>();
+    expectedArgumentDefs.put(mentionArgName, Mention.class);
+    expectedArgumentDefs.put(stringArgName, String.class);
     assertEquals(expectedArgumentDefs, pattern.getArgumentDefinitions());
 
     final MatchResult matchResult = pattern.getMatchResult(message);

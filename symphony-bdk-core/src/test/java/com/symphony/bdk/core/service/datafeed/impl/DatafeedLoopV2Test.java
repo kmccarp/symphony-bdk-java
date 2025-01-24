@@ -219,7 +219,7 @@ class DatafeedLoopV2Test {
         @Override
         public boolean isAcceptingEvent(V4Event event, UserV2 botInfo) {
           // once the listener is added it will stop the DF loop
-          if (datafeedService.getAckId().equals("ack-id2")) {
+          if ("ack-id2".equals(datafeedService.getAckId())) {
             datafeedService.stop();
           }
           return false;

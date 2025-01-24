@@ -210,7 +210,7 @@ class AbstractOboAuthenticatorTest {
     AbstractOboAuthenticator authenticator = spy(new TestAbstractOboAuthenticator(ofMinimalInterval()));
     doThrow(new ApiException(401, "")).when(authenticator).authenticateAndRetrieveAppSessionToken();
 
-    assertThrows(AuthUnauthorizedException.class, () -> authenticator.retrieveAppSessionToken());
+    assertThrows(AuthUnauthorizedException.class, authenticator::retrieveAppSessionToken);
     verify(authenticator, times(1)).authenticateAndRetrieveAppSessionToken();
   }
 
@@ -219,7 +219,7 @@ class AbstractOboAuthenticatorTest {
     AbstractOboAuthenticator authenticator = spy(new TestAbstractOboAuthenticator(ofMinimalInterval()));
     doThrow(new ApiException(404, "")).when(authenticator).authenticateAndRetrieveAppSessionToken();
 
-    assertThrows(ApiRuntimeException.class, () -> authenticator.retrieveAppSessionToken());
+    assertThrows(ApiRuntimeException.class, authenticator::retrieveAppSessionToken);
     verify(authenticator, times(1)).authenticateAndRetrieveAppSessionToken();
   }
 
@@ -242,7 +242,7 @@ class AbstractOboAuthenticatorTest {
     AbstractOboAuthenticator authenticator = spy(new TestAbstractOboAuthenticator(ofMinimalInterval(2)));
     doThrow(new ApiException(429, "")).when(authenticator).authenticateAndRetrieveAppSessionToken();
 
-    assertThrows(ApiRuntimeException.class, () -> authenticator.retrieveAppSessionToken());
+    assertThrows(ApiRuntimeException.class, authenticator::retrieveAppSessionToken);
     verify(authenticator, times(2)).authenticateAndRetrieveAppSessionToken();
   }
 }

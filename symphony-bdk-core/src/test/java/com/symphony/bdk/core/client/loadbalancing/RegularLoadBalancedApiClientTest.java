@@ -35,17 +35,18 @@ class RegularLoadBalancedApiClientTest {
   private ApiClientFactory apiClientFactory;
   private ApiClient apiClient;
 
-  private String path = "path";
-  private String method = "POST";
-  private List<Pair> queryParams = Collections.singletonList(new Pair("param", "value"));
-  private String body = "body";
-  private Map<String, String> headerParams = Collections.singletonMap("header", "value");
-  private Map<String, String> cookieParams = Collections.singletonMap("cookie", "value");
-  private Map<String, Object> formParams = Collections.singletonMap("form", "value");
-  private String accept = "accept";
-  private String contentType = "content type";
-  private String[] authNames = new String[] {"authNames"};
-  private TypeReference<String> returnType = new TypeReference<String>() {};
+  private final String path = "path";
+  private final String method = "POST";
+  private final List<Pair> queryParams = Collections.singletonList(new Pair("param", "value"));
+  private final String body = "body";
+  private final Map<String, String> headerParams = Collections.singletonMap("header", "value");
+  private final Map<String, String> cookieParams = Collections.singletonMap("cookie", "value");
+  private final Map<String, Object> formParams = Collections.singletonMap("form", "value");
+  private final String accept = "accept";
+  private final String contentType = "content type";
+  private final String[] authNames = new String[]{"authNames"};
+  private final TypeReference<String> returnType = new TypeReference<>() {
+  };
 
   @BeforeEach
   public void setUp() {

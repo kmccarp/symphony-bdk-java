@@ -37,7 +37,7 @@ public class Resilience4jRetryWithRecovery<T> extends RetryWithRecovery<T> {
    */
   public Resilience4jRetryWithRecovery(String name, String address, BdkRetryConfig bdkRetryConfig, SupplierWithApiException<T> supplier,
       Predicate<Throwable> retryOnExceptionPredicate, List<RecoveryStrategy> recoveryStrategies) {
-    this(name, address, bdkRetryConfig, supplier, retryOnExceptionPredicate, (e) -> false, recoveryStrategies);
+    this(name, address, bdkRetryConfig, supplier, retryOnExceptionPredicate, e -> false, recoveryStrategies);
   }
 
   /**

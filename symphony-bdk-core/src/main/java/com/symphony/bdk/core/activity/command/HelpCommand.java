@@ -68,7 +68,7 @@ public class HelpCommand extends SlashCommand {
     if (this == o) {return true;}
 
     if (o instanceof SlashCommand) {
-      SlashCommand that = ((SlashCommand) o);
+      SlashCommand that = (SlashCommand) o;
       return that.getInfo().name() != null && that.getInfo().name().equals(HELP_COMMAND);
     }
 

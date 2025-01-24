@@ -32,7 +32,7 @@ import java.util.Map;
  *       .get(new TypeReference<String>() {});
  * }</pre>
  */
-public class HttpClient {
+public final class HttpClient {
 
   private final ApiClient apiClient;
   private final RequestConfig requestConfig;
@@ -241,16 +241,16 @@ public class HttpClient {
     // base path
     private String basePath = "";
     // keystore
-    private byte[] keyStore = null;
+    private byte[] keyStore;
     private String keyStorePassword = "";
     // truststore
-    private byte[] trustStore = null;
+    private byte[] trustStore;
     private String trustStorePassword = "";
     // proxy
-    private String proxyHost = null;
+    private String proxyHost;
     private int proxyPort = -1;
-    private String proxyUser = null;
-    private String proxyPassword = null;
+    private String proxyUser;
+    private String proxyPassword;
     // common headers and cookies
     private final Map<String, String> headers = new HashMap<>();
     private final Map<String, String> cookies = new HashMap<>();

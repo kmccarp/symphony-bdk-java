@@ -60,7 +60,7 @@ public final class ApiUtils {
     }
 
     final Collection<?> collection = (Collection<?>) paramValue;
-    return !collection.isEmpty() && collection.stream().allMatch(p -> p instanceof File);
+    return !collection.isEmpty() && collection.stream().allMatch(File.class::isInstance);
   }
 
   private static String getBdkVersion() {

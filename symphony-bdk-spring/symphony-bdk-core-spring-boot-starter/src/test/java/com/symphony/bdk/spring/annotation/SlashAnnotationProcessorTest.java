@@ -60,7 +60,7 @@ public class SlashAnnotationProcessorTest {
     final List<SlashCommand> slashCommands = this.activityRegistry.getActivityList()
         .stream()
         .filter(a -> a.getClass().equals(SlashCommand.class))
-        .map(a -> (SlashCommand) a)
+        .map(SlashCommand.class::cast)
         .collect(Collectors.toList());
     assertEquals(7, slashCommands.size());
 

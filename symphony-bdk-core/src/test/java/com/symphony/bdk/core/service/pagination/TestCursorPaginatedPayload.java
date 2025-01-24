@@ -5,8 +5,8 @@ import com.symphony.bdk.core.service.pagination.model.CursorPaginatedPayload;
 import java.util.List;
 
 public class TestCursorPaginatedPayload implements CursorPaginatedPayload<String> {
-  private String next;
-  private List<String> data;
+  private final String next;
+  private final List<String> data;
 
   public TestCursorPaginatedPayload(String next, List<String> data) {
     this.next = next;

@@ -43,7 +43,7 @@ public class CursorBasedPaginatedService<T> extends PaginatedService {
 
     private CursorPaginatedPayload<T> currentPayload;
     private List<T> currentChunk;
-    private int fetchedItems = 0;
+    private int fetchedItems;
 
     @Override
     public boolean hasNext() {
