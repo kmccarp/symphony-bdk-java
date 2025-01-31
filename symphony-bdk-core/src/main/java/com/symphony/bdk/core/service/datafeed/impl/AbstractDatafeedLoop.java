@@ -44,7 +44,7 @@ abstract class AbstractDatafeedLoop implements DatafeedLoop {
   // access needs to be thread safe (DF loop is usually running on its own thread)
   private final List<RealTimeEventListener> listeners;
 
-  public AbstractDatafeedLoop(DatafeedApi datafeedApi, AuthSession authSession, BdkConfig config, UserV2 botInfo) {
+  protected AbstractDatafeedLoop(DatafeedApi datafeedApi, AuthSession authSession, BdkConfig config, UserV2 botInfo) {
     this.datafeedApi = datafeedApi;
     this.listeners = new ArrayList<>();
     this.authSession = authSession;

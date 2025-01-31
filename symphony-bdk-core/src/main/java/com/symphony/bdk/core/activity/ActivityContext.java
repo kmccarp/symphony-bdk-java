@@ -36,7 +36,7 @@ public abstract class ActivityContext<E> {
    */
   private final Long eventTimestamp;
 
-  public ActivityContext(V4Initiator initiator, E sourceEvent) {
+  protected ActivityContext(V4Initiator initiator, E sourceEvent) {
     this.initiator = initiator;
     this.sourceEvent = sourceEvent;
     if (EventPayload.class.isAssignableFrom(sourceEvent.getClass())) {

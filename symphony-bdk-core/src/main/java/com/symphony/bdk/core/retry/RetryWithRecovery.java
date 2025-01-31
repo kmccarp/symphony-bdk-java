@@ -67,7 +67,7 @@ public abstract class RetryWithRecovery<T> {
     }
   }
 
-  public RetryWithRecovery(
+  protected RetryWithRecovery(
       SupplierWithApiException<T> supplier,
       Predicate<Exception> ignoreException,
       List<RecoveryStrategy> recoveryStrategies,

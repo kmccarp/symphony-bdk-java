@@ -33,7 +33,7 @@ public abstract class LoadBalancedApiClient implements ApiClient {
    * @param config the bdk configuration to be used
    * @param apiClientFactory the api client factory used to instantiate {@link ApiClient} instances.
    */
-  public LoadBalancedApiClient(BdkConfig config, ApiClientFactory apiClientFactory) {
+  protected LoadBalancedApiClient(BdkConfig config, ApiClientFactory apiClientFactory) {
     validateLoadBalancingConfiguration(config);
 
     this.apiClientFactory = apiClientFactory;

@@ -33,7 +33,7 @@ public abstract class AbstractAckIdEventLoop extends AbstractDatafeedLoop {
   @Getter(AccessLevel.PROTECTED)
   protected String ackId;
 
-  public AbstractAckIdEventLoop(DatafeedApi datafeedApi, AuthSession authSession, BdkConfig config, UserV2 botInfo) {
+  protected AbstractAckIdEventLoop(DatafeedApi datafeedApi, AuthSession authSession, BdkConfig config, UserV2 botInfo) {
     super(datafeedApi, authSession, config, botInfo);
     this.ackId = INITIAL_ACK_ID;
   }

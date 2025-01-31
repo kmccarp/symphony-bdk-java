@@ -28,7 +28,7 @@ public abstract class AbstractActivity<E, C extends ActivityContext<E>> {
   private ActivityInfo info;
   private final ExecutorService executorService;
 
-  public AbstractActivity() {
+  protected AbstractActivity() {
     ThreadFactory threadFactory = new ThreadFactoryBuilder()
         .setName("Activity-Async-Thread")
         .setPriority(Thread.NORM_PRIORITY)

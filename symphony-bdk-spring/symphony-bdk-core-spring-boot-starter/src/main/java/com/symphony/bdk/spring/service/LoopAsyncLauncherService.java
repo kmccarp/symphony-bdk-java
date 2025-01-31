@@ -20,7 +20,7 @@ public abstract class LoopAsyncLauncherService implements Thread.UncaughtExcepti
   private DatafeedLoop loop;
   private List<RealTimeEventListener> realTimeEventListeners;
 
-  public LoopAsyncLauncherService(DatafeedLoop loop,
+  protected LoopAsyncLauncherService(DatafeedLoop loop,
       List<RealTimeEventListener> realTimeEventListeners) {
     this.loop = loop;
     this.realTimeEventListeners = realTimeEventListeners;
